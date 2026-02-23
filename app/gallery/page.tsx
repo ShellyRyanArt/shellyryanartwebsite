@@ -26,6 +26,17 @@ const artworks = [
     available: true,
   },
   {
+    src: "/images/gallery/temptation.jpg",
+    title: "La Tentation",
+    medium: "Mixed Media Hand Cut Paper Collage on Wood Panel",
+    year: "2024",
+    dimensions: "10 × 10 in",
+    depth: "1.5 in deep · Collaged sides · Wired and ready to hang",
+    price: "$195",
+    description: "\"La Tentation\" — The Temptation — was born from the idea that the forbidden fruit in the Garden of Eden was not an apple at all, but a pomegranate. Rich, jeweled, and ancient, the pomegranate sits coiled in the serpent's embrace on a background of vintage French/English dictionary pages. The snake was built from an advertisement for a luxury purse — temptation constructed from temptation itself. The deep crimson of the pomegranate came from a food advertisement. A piece about desire, knowledge, and the oldest story ever told.",
+    available: true,
+  },
+  {
     src: "/images/gallery/trout.jpg",
     title: "La Truite",
     medium: "Mixed Media Hand Cut Paper Collage on Wood Panel",
