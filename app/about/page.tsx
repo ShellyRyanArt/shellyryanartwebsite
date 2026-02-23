@@ -50,26 +50,32 @@ export default function AboutPage() {
               className="font-display mb-6"
               style={{ fontSize: "2rem", fontWeight: 300, fontStyle: "italic", color: "var(--ink)", lineHeight: 1.2 }}
             >
-              Where nature meets the written word — one cut piece at a time
+              Art rooted in the Gulf Coast and a lifelong love of the natural world
             </h2>
             <div style={{ width: "40px", height: "1px", background: "var(--amber)", marginBottom: "2rem" }} />
             <p
               className="font-display mb-6"
               style={{ fontSize: "1.15rem", color: "var(--ink-light)", lineHeight: 1.9, fontWeight: 300 }}
             >
-              Shelly Ryan is a collage artist whose work lives at the intersection of language and the natural world. Her signature Dictionary Series features hyperrealistic animals and insects built entirely from hand cut pieces of magazine pages, layered by hand onto the densely typeset pages of vintage dictionaries.
+              Shelly Ryan is a Gulf Coast artist whose work is inseparable from the world she lives in. Based in Beaumont, Texas — just miles from the Louisiana state line — her art draws from the rich natural and cultural landscape of the Southeast Texas and Louisiana Gulf Coast: its wildlife, its waterways, its unhurried, deeply rooted sense of place.
             </p>
             <p
               className="font-display mb-6"
               style={{ fontSize: "1.15rem", color: "var(--ink-light)", lineHeight: 1.9, fontWeight: 300 }}
             >
-              Every piece begins with Shelly sitting with stacks of magazines — patiently sourcing the exact colors, textures, and tones she needs. A wing might come from a fashion spread. A beak from a travel photograph. The iridescent shimmer of an insect from a cosmetics advertisement. Each fragment is chosen, cut by hand, and placed with intention.
+              Before dedicating herself to art, Shelly spent years working as a horticulturist — a practice that trained her to observe the natural world with patience and precision. She learned to see the architecture of a leaf, the geometry of an insect's wing, the way light moves through living things. That same eye now guides every piece she makes.
+            </p>
+            <p
+              className="font-display mb-6"
+              style={{ fontSize: "1.15rem", color: "var(--ink-light)", lineHeight: 1.9, fontWeight: 300 }}
+            >
+              Her signature work is hand cut paper collage — each piece built fragment by fragment from images sourced from magazines, layered by hand onto the pages of vintage dictionaries. She sits with stacks of magazines searching for exactly the right color, the right texture, the right tone. A feather might come from a fashion spread. A beak from a wildlife photograph. The iridescent shimmer of an insect wing from a cosmetics advertisement. Every fragment is chosen, cut by hand, and placed with intention.
             </p>
             <p
               className="font-display"
               style={{ fontSize: "1.15rem", color: "var(--ink-light)", lineHeight: 1.9, fontWeight: 300 }}
             >
-              The dictionary page beneath is never just a background — it is a collaborator. A pelican rises from a page of words beginning with P. A bee hovers above definitions of industry and sweetness. The juxtaposition is deliberate: no dictionary can fully contain what it means to be alive, and no magazine image alone can capture the wildness of nature. Together, they come close.
+              The result is work that rewards those who slow down — art that reveals more the longer you look.
             </p>
 
             <div className="mt-10">

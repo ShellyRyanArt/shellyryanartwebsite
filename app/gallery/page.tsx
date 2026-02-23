@@ -9,22 +9,31 @@ const artworks = [
     medium: "Hand Cut Paper Collage on Vintage Dictionary Page",
     year: "2024",
     dimensions: "11 × 11 in",
+    depth: "",
+    price: "",
+    description: "",
     available: true,
   },
   {
     src: "/images/gallery/pelican.jpg",
-    title: "Pelican",
+    title: "The Gulf Sentinel",
     medium: "Hand Cut Paper Collage on Vintage Dictionary Page",
     year: "2024",
-    dimensions: "9 × 12 in",
+    dimensions: "16 × 12 in",
+    depth: "1.5 in deep · Collaged sides · Wired and ready to hang",
+    price: "$450",
+    description: "The Gulf Sentinel stands on the dictionary page that carries his own definition — the word \"pelican\" visible beneath him, accompanied by a small printed sketch, as if the bird has simply stepped out of the text that tried to contain him. His striking black and white head was painstakingly sourced from photographs of panda bears. The greenish iridescence of his beak came from images of fish. Each individual feather was hand cut separately — one of the most time-consuming elements in the entire series. Look closely and the page beneath begins to reveal itself.",
     available: true,
   },
   {
     src: "/images/gallery/cricket.jpg",
-    title: "Cricket",
+    title: "Mosquito",
     medium: "Hand Cut Paper Collage on Vintage Dictionary Page",
     year: "2024",
     dimensions: "11 × 14 in",
+    depth: "",
+    price: "",
+    description: "",
     available: true,
   },
 ];
@@ -152,7 +161,7 @@ export default function GalleryPage() {
             </div>
 
             {/* Details */}
-            <div className="md:w-64 text-center md:text-left">
+            <div className="md:w-72 text-center md:text-left">
               <p
                 className="font-sans-light mb-2"
                 style={{ fontSize: "0.6rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--amber-light)" }}
@@ -161,20 +170,38 @@ export default function GalleryPage() {
               </p>
               <h2
                 className="font-display mb-4"
-                style={{ fontSize: "2.5rem", fontWeight: 300, color: "var(--parchment)", lineHeight: 1.1 }}
+                style={{ fontSize: "2.25rem", fontWeight: 300, color: "var(--parchment)", lineHeight: 1.1 }}
               >
                 {selected.title}
               </h2>
               <div style={{ width: "40px", height: "1px", background: "var(--amber)", marginBottom: "1.5rem" }} />
-              <p className="font-sans-light mb-2" style={{ fontSize: "0.7rem", color: "var(--parchment-deeper)", letterSpacing: "0.1em" }}>
+
+              <p className="font-sans-light mb-1" style={{ fontSize: "0.7rem", color: "var(--parchment-deeper)", letterSpacing: "0.1em" }}>
                 {selected.medium}
               </p>
               <p className="font-sans-light mb-1" style={{ fontSize: "0.7rem", color: "var(--parchment-deeper)", letterSpacing: "0.1em" }}>
-                {selected.dimensions}
+                {selected.dimensions}{selected.depth ? ` · ${selected.depth}` : ""}
               </p>
-              <p className="font-sans-light mb-8" style={{ fontSize: "0.7rem", color: "var(--parchment-deeper)", letterSpacing: "0.1em" }}>
+              <p className="font-sans-light mb-4" style={{ fontSize: "0.7rem", color: "var(--parchment-deeper)", letterSpacing: "0.1em" }}>
                 {selected.year}
               </p>
+
+              {selected.price && (
+                <p className="font-display mb-4" style={{ fontSize: "1.75rem", fontWeight: 400, color: "var(--amber-light)" }}>
+                  {selected.price}
+                </p>
+              )}
+
+              {selected.description && (
+                <p className="font-display mb-4" style={{ fontSize: "0.95rem", fontStyle: "italic", color: "rgba(244,239,228,0.75)", lineHeight: 1.8 }}>
+                  {selected.description}
+                </p>
+              )}
+
+              <p className="font-sans-light mb-6" style={{ fontSize: "0.6rem", letterSpacing: "0.12em", color: "rgba(244,239,228,0.45)", lineHeight: 1.8, borderTop: "1px solid rgba(196,168,90,0.2)", paddingTop: "1rem" }}>
+                Includes original artwork stamp &amp; certificate of authenticity
+              </p>
+
               <a
                 href="/contact"
                 className="font-sans-light"
