@@ -26,6 +26,17 @@ const artworks = [
     available: true,
   },
   {
+    src: "/images/gallery/trout.jpg",
+    title: "La Truite",
+    medium: "Mixed Media Hand Cut Paper Collage on Wood Panel",
+    year: "2024",
+    dimensions: "6 × 12 in",
+    depth: "1.5 in deep · Collaged sides · Wired and ready to hang",
+    price: "$195",
+    description: "\"La Truite\" — the trout — swims across a background of vintage French/English dictionary pages, a companion piece to Les Huitres in Shelly's growing French series. The body of the fish was assembled from images sourced across many different fish photographs, each fragment chosen for its color and scale. The fins along the bottom and the upper fin were cut from an image of a skirt — the flow of fabric becoming the movement of water, the suggestion of current and grace.",
+    available: true,
+  },
+  {
     src: "/images/gallery/oyster.jpg",
     title: "Les Huitres",
     medium: "Mixed Media Hand Cut Paper Collage on Wood Panel",
