@@ -26,6 +26,17 @@ const artworks = [
     available: true,
   },
   {
+    src: "/images/gallery/oyster.jpg",
+    title: "Les Huitres",
+    medium: "Mixed Media Hand Cut Paper Collage on Wood Panel",
+    year: "2024",
+    dimensions: "9 × 12 in",
+    depth: "1.5 in deep · Collaged sides · Wired and ready to hang",
+    price: "$250",
+    description: "\"Les Huitres\" — the oysters — sits on a background of vintage French/English dictionary pages, a quiet nod to the Louisiana culture that inspired it. The rough, ancient exterior of the shell was built from magazine images of rocks and sand, each fragment chosen for its texture and weight. The soft, luminous meat within came from clothing advertisements — silks and satins transformed into something altogether more alive. A Gulf Coast delicacy, rendered in the language of two worlds.",
+    available: true,
+  },
+  {
     src: "/images/gallery/cricket.jpg",
     title: "Mascot of the Gulf Coast",
     medium: "Mixed Media Hand Cut Paper Collage on Wood Panel",
