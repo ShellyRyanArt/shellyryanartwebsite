@@ -6,20 +6,20 @@ import Link from "next/link";
 const featuredWorks = [
   {
     src: "/images/gallery/bee.jpg",
-    title: "Honeybee",
-    medium: "Hand Cut Paper Collage",
+    title: "Saint of the Southern Hive",
+    medium: "Mixed Media Hand Cut Paper Collage",
     year: "2024",
   },
   {
     src: "/images/gallery/pelican.jpg",
-    title: "Pelican",
-    medium: "Hand Cut Paper Collage",
+    title: "The Gulf Sentinel",
+    medium: "Mixed Media Hand Cut Paper Collage",
     year: "2024",
   },
   {
     src: "/images/gallery/cricket.jpg",
-    title: "Cricket",
-    medium: "Hand Cut Paper Collage",
+    title: "Mascot of the Gulf Coast",
+    medium: "Mixed Media Hand Cut Paper Collage",
     year: "2024",
   },
 ];
