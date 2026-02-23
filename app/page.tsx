@@ -278,7 +278,7 @@ export default function HomePage() {
               lineHeight: 1.6,
             }}
           >
-            "Each collage lives on the page where language defines the world — a reminder that nature, too, defies definition."
+            "Each piece is designed to be discovered. From a distance, the work appears almost photographic. Step closer and the illusion gives way to something more intimate — hundreds of tiny hand cut fragments, each chosen with intention. Stay a little longer, and the background beneath begins to speak."
           </blockquote>
           <div className="mt-8 divider" />
           <p

@@ -161,7 +161,7 @@ export default function AboutPage() {
             className="font-display"
             style={{ fontSize: "1.3rem", fontStyle: "italic", color: "var(--sepia)", lineHeight: 1.8 }}
           >
-            Every piece is entirely handmade — no digital tools, no AI, no shortcuts. Just Shelly, a stack of magazines, a pair of scissors, and time.
+            "Each piece is designed to be discovered. From a distance, the work appears almost photographic — a pelican, a bee, a cricket rendered with startling realism. Step closer and the illusion gives way to something more intimate: hundreds of tiny hand cut fragments of magazine paper, each one chosen for its color, texture, and tone. Stay a little longer, and the background beneath begins to speak — details and layers that only reveal themselves to those who take the time to look."
           </p>
           <div className="mt-8 divider" />
         </div>
