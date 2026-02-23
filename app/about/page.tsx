@@ -27,20 +27,20 @@ export default function AboutPage() {
       {/* Bio section */}
       <section className="py-20 px-8" style={{ background: "var(--parchment)" }}>
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-          {/* Featured artwork */}
+          {/* Artist photo */}
           <div className="relative">
             <Image
-              src="/images/gallery/bee.jpg"
-              alt="Honeybee — Hand Cut Paper Collage on Vintage Dictionary Page"
+              src="/images/shelly-ryan.jpg"
+              alt="Shelly Ryan — Rip Van Winkle Gardens, Louisiana"
               width={600}
-              height={630}
+              height={750}
               style={{ width: "100%", height: "auto" }}
             />
             <p
               className="mt-3 font-sans-light text-center"
               style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--sepia)" }}
             >
-              Honeybee · Hand Cut Paper Collage on Vintage Dictionary Page
+              Shelly Ryan · Rip Van Winkle Gardens, Louisiana
             </p>
           </div>
 
