@@ -25,16 +25,13 @@ export default function AboutPage() {
       </section>
 
       {/* Bio section */}
-      <section
-        className="py-20 px-8"
-        style={{ background: "var(--parchment)" }}
-      >
+      <section className="py-20 px-8" style={{ background: "var(--parchment)" }}>
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-          {/* Featured artwork as portrait stand-in */}
+          {/* Featured artwork */}
           <div className="relative">
             <Image
               src="/images/gallery/bee.jpg"
-              alt="Featured Work — Honeybee"
+              alt="Honeybee — Hand Cut Paper Collage on Vintage Dictionary Page"
               width={600}
               height={630}
               style={{ width: "100%", height: "auto" }}
@@ -43,7 +40,7 @@ export default function AboutPage() {
               className="mt-3 font-sans-light text-center"
               style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--sepia)" }}
             >
-              Honeybee · Acrylic on Vintage Dictionary Page
+              Honeybee · Hand Cut Paper Collage on Vintage Dictionary Page
             </p>
           </div>
 
@@ -53,28 +50,26 @@ export default function AboutPage() {
               className="font-display mb-6"
               style={{ fontSize: "2rem", fontWeight: 300, fontStyle: "italic", color: "var(--ink)", lineHeight: 1.2 }}
             >
-              Where nature meets the written word
+              Where nature meets the written word — one cut piece at a time
             </h2>
-            <div
-              style={{ width: "40px", height: "1px", background: "var(--amber)", marginBottom: "2rem" }}
-            />
+            <div style={{ width: "40px", height: "1px", background: "var(--amber)", marginBottom: "2rem" }} />
             <p
               className="font-display mb-6"
               style={{ fontSize: "1.15rem", color: "var(--ink-light)", lineHeight: 1.9, fontWeight: 300 }}
             >
-              Shelly Ryan is an artist whose work lives at the intersection of language and the natural world. Her signature Dictionary Series features hyperrealistic animals and insects rendered in acrylic atop the densely typeset pages of vintage dictionaries.
+              Shelly Ryan is a collage artist whose work lives at the intersection of language and the natural world. Her signature Dictionary Series features hyperrealistic animals and insects built entirely from hand cut pieces of magazine pages, layered by hand onto the densely typeset pages of vintage dictionaries.
             </p>
             <p
               className="font-display mb-6"
               style={{ fontSize: "1.15rem", color: "var(--ink-light)", lineHeight: 1.9, fontWeight: 300 }}
             >
-              The dictionary page — with its columns of definitions, etymologies, and cross-references — becomes a landscape in itself. A pelican rises from a page defining words beginning with the letter P. A honeybee hovers above entries for human industry and sweetness. The juxtaposition is deliberate: no dictionary can fully contain what it means to be alive.
+              Every piece begins with Shelly sitting with stacks of magazines — patiently sourcing the exact colors, textures, and tones she needs. A wing might come from a fashion spread. A beak from a travel photograph. The iridescent shimmer of an insect from a cosmetics advertisement. Each fragment is chosen, cut by hand, and placed with intention.
             </p>
             <p
               className="font-display"
               style={{ fontSize: "1.15rem", color: "var(--ink-light)", lineHeight: 1.9, fontWeight: 300 }}
             >
-              Each piece is one of a kind — painted on a specific, unrepeatable page — making every original a dual artifact of human knowledge and artistic vision.
+              The dictionary page beneath is never just a background — it is a collaborator. A pelican rises from a page of words beginning with P. A bee hovers above definitions of industry and sweetness. The juxtaposition is deliberate: no dictionary can fully contain what it means to be alive, and no magazine image alone can capture the wildness of nature. Together, they come close.
             </p>
 
             <div className="mt-10">
@@ -100,10 +95,7 @@ export default function AboutPage() {
       </section>
 
       {/* Process section */}
-      <section
-        className="py-24 px-8"
-        style={{ background: "var(--parchment-dark)" }}
-      >
+      <section className="py-24 px-8" style={{ background: "var(--parchment-dark)" }}>
         <div className="max-w-4xl mx-auto text-center">
           <p
             className="font-sans-light mb-4"
@@ -115,7 +107,7 @@ export default function AboutPage() {
             className="font-display mb-8"
             style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)", fontWeight: 300, color: "var(--ink)", lineHeight: 1.2 }}
           >
-            Found pages, painted worlds
+            Entirely made by hand
           </h2>
           <div className="divider mb-10" />
 
@@ -123,18 +115,18 @@ export default function AboutPage() {
             {[
               {
                 number: "01",
-                title: "The Page",
-                body: "Each work begins with a sourced page from a vintage dictionary — selected for its age, density of text, and the resonance between the words on the page and the subject to be painted.",
+                title: "The Hunt",
+                body: "Shelly begins each piece by sitting with magazines — searching for the precise colors, textures, and tones she needs. A single piece might require sourcing fragments from dozens of magazines before the right ones are found.",
               },
               {
                 number: "02",
-                title: "The Study",
-                body: "Shelly works from detailed observation and reference, building an intimate understanding of her subject before the first brushstroke touches the dictionary's aged surface.",
+                title: "The Cut",
+                body: "Every element is hand cut — no digital tools, no machines. Tiny pieces are trimmed with scissors and blades, shaped to follow the contours of feathers, fur, and wings. It is slow, meditative, intentional work.",
               },
               {
                 number: "03",
-                title: "The Painting",
-                body: "Acrylic paint is layered with precision, allowing the underlying text to breathe through in places — a deliberate dialogue between the written and the observed.",
+                title: "The Collage",
+                body: "Fragments are layered onto a page sourced from a vintage dictionary — building the subject piece by piece, color by color, until a living creature emerges from the language of a world that tried to define it.",
               },
             ].map((step) => (
               <div key={step.number}>
@@ -159,6 +151,19 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Handmade note */}
+      <section className="py-20 px-8" style={{ background: "var(--parchment)" }}>
+        <div className="max-w-xl mx-auto text-center">
+          <p
+            className="font-display"
+            style={{ fontSize: "1.3rem", fontStyle: "italic", color: "var(--sepia)", lineHeight: 1.8 }}
+          >
+            Every piece is entirely handmade — no digital tools, no AI, no shortcuts. Just Shelly, a stack of magazines, a pair of scissors, and time.
+          </p>
+          <div className="mt-8 divider" />
         </div>
       </section>
     </>

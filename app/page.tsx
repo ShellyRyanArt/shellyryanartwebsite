@@ -7,19 +7,19 @@ const featuredWorks = [
   {
     src: "/images/gallery/bee.jpg",
     title: "Honeybee",
-    medium: "Acrylic on Dictionary Page",
+    medium: "Hand Cut Paper Collage",
     year: "2024",
   },
   {
     src: "/images/gallery/pelican.jpg",
     title: "Pelican",
-    medium: "Acrylic on Dictionary Page",
+    medium: "Hand Cut Paper Collage",
     year: "2024",
   },
   {
     src: "/images/gallery/cricket.jpg",
     title: "Cricket",
-    medium: "Acrylic on Dictionary Page",
+    medium: "Hand Cut Paper Collage",
     year: "2024",
   },
 ];
@@ -92,7 +92,7 @@ export default function HomePage() {
               transition: "opacity 1.4s ease 0.4s",
             }}
           >
-            Original Fine Art · Dictionary Series
+            Original Fine Art · Hand Cut Paper Collage
           </p>
 
           {/* CTA */}
@@ -278,7 +278,7 @@ export default function HomePage() {
               lineHeight: 1.6,
             }}
           >
-            "Each painting lives on the page where language defines the world — a reminder that nature, too, defies definition."
+            "Each collage lives on the page where language defines the world — a reminder that nature, too, defies definition."
           </blockquote>
           <div className="mt-8 divider" />
           <p

@@ -6,7 +6,7 @@ const artworks = [
   {
     src: "/images/gallery/bee.jpg",
     title: "Honeybee",
-    medium: "Acrylic on Vintage Dictionary Page",
+    medium: "Hand Cut Paper Collage on Vintage Dictionary Page",
     year: "2024",
     dimensions: "11 × 11 in",
     available: true,
@@ -14,7 +14,7 @@ const artworks = [
   {
     src: "/images/gallery/pelican.jpg",
     title: "Pelican",
-    medium: "Acrylic on Vintage Dictionary Page",
+    medium: "Hand Cut Paper Collage on Vintage Dictionary Page",
     year: "2024",
     dimensions: "9 × 12 in",
     available: true,
@@ -22,7 +22,7 @@ const artworks = [
   {
     src: "/images/gallery/cricket.jpg",
     title: "Cricket",
-    medium: "Acrylic on Vintage Dictionary Page",
+    medium: "Hand Cut Paper Collage on Vintage Dictionary Page",
     year: "2024",
     dimensions: "11 × 14 in",
     available: true,
@@ -56,7 +56,7 @@ export default function GalleryPage() {
           className="mt-6 font-display mx-auto"
           style={{ fontSize: "1.1rem", fontStyle: "italic", color: "var(--sepia)", maxWidth: "520px", lineHeight: 1.8 }}
         >
-          Each work is painted in acrylic on pages sourced from vintage dictionaries — where the language of nature and the language of definition meet.
+          Each work is a hand cut paper collage — built from pieces sourced from magazines and layered by hand onto pages from vintage dictionaries, where the language of nature and the language of definition meet.
         </p>
       </section>
 
