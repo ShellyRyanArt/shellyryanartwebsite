@@ -300,7 +300,7 @@ export default function HomePage() {
             className="font-sans-light mb-4"
             style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--sepia)" }}
           >
-            Inquiries & Commissions
+            Interested in a piece?
           </p>
           <h2
             className="font-display mb-6"
@@ -312,7 +312,7 @@ export default function HomePage() {
             className="font-display mb-10"
             style={{ fontSize: "1.1rem", fontStyle: "italic", color: "var(--sepia)", lineHeight: 1.8 }}
           >
-            Original works and limited prints available. Commission inquiries welcome.
+            Original works available. Inquiries welcome.
           </p>
           <Link
             href="/contact"

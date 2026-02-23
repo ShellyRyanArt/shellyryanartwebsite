@@ -87,7 +87,7 @@ export default function AboutPage() {
                   transition: "background 0.3s ease",
                 }}
               >
-                Commission a Piece
+                Inquire About This Work
               </Link>
             </div>
           </div>
