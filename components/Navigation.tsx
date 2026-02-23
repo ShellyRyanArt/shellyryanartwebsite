@@ -46,13 +46,19 @@ export default function Navigation() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden flex flex-col items-center gap-1.5 p-2"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
           <span className="block w-6 h-px transition-all duration-300" style={{ background: "var(--ink)", transform: menuOpen ? "rotate(45deg) translate(2px, 2px)" : "" }} />
           <span className="block w-6 h-px transition-all duration-300" style={{ background: "var(--ink)", opacity: menuOpen ? 0 : 1 }} />
           <span className="block w-6 h-px transition-all duration-300" style={{ background: "var(--ink)", transform: menuOpen ? "rotate(-45deg) translate(2px, -2px)" : "" }} />
+          <span
+            className="font-sans-light"
+            style={{ fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--ink-light)", marginTop: "2px" }}
+          >
+            {menuOpen ? "Close" : "Menu"}
+          </span>
         </button>
       </nav>
 
