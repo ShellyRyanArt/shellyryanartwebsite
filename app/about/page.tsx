@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 export default function AboutPage() {
   return (
@@ -28,12 +27,12 @@ export default function AboutPage() {
       <section className="py-20 px-8" style={{ background: "var(--parchment)" }}>
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           {/* Artist photo */}
-          <div className="relative">
+          <div className="relative max-w-sm mx-auto md:mx-0">
             <Image
               src="/images/shelly-ryan.jpg"
               alt="Shelly Ryan — Rip Van Winkle Gardens, Louisiana"
-              width={600}
-              height={750}
+              width={400}
+              height={500}
               style={{ width: "100%", height: "auto" }}
             />
             <p
@@ -48,7 +47,7 @@ export default function AboutPage() {
           <div>
             <h2
               className="font-display mb-6"
-              style={{ fontSize: "2rem", fontWeight: 300, fontStyle: "italic", color: "var(--ink)", lineHeight: 1.2 }}
+              style={{ fontSize: "2rem", fontWeight: 300, fontStyle: "italic", color: "var(--ink)", lineHeight: 1.2, textAlign: "center" }}
             >
               Art rooted in the Gulf Coast and a lifelong love of the natural world
             </h2>
@@ -63,7 +62,7 @@ export default function AboutPage() {
               className="font-display mb-6"
               style={{ fontSize: "1.15rem", color: "var(--ink-light)", lineHeight: 1.9, fontWeight: 300 }}
             >
-              Before dedicating herself to art, Shelly spent years working as a horticulturist — a practice that trained her to observe the natural world with patience and precision. She learned to see the architecture of a leaf, the geometry of an insect's wing, the way light moves through living things. That same eye now guides every piece she makes.
+              Before dedicating herself to art, Shelly spent years working as a horticulturist — a practice that trained her to observe the natural world with patience and precision. She learned to see the architecture of a leaf, the geometry of an insect&apos;s wing, the way light moves through living things. That same eye now guides every piece she makes.
             </p>
             <p
               className="font-display mb-6"
@@ -77,41 +76,25 @@ export default function AboutPage() {
             >
               The result is work that rewards those who slow down — art that reveals more the longer you look.
             </p>
-
-            <div className="mt-10">
-              <Link
-                href="/contact"
-                className="font-sans-light"
-                style={{
-                  display: "inline-block",
-                  padding: "0.875rem 2.5rem",
-                  background: "var(--ink)",
-                  color: "var(--parchment)",
-                  fontSize: "0.7rem",
-                  letterSpacing: "0.25em",
-                  textTransform: "uppercase",
-                  transition: "background 0.3s ease",
-                }}
-              >
-                Inquire About This Work
-              </Link>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Process section */}
-      <section className="py-24 px-8" style={{ background: "var(--parchment-dark)" }}>
-        <div className="max-w-4xl mx-auto text-center">
+      <section style={{ background: "var(--parchment)", padding: "4rem 6rem" }}>
+        <div
+          className="max-w-4xl mx-auto text-center"
+          style={{ background: "var(--parchment-dark)", padding: "3.5rem 3rem", borderRadius: "2px" }}
+        >
           <p
             className="font-sans-light mb-4"
-            style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--amber)" }}
+            style={{ fontSize: "0.85rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--amber)" }}
           >
             The Process
           </p>
           <h2
             className="font-display mb-8"
-            style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)", fontWeight: 300, color: "var(--ink)", lineHeight: 1.2 }}
+            style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)", fontWeight: 300, color: "var(--ink)", lineHeight: 1.2, textAlign: "center" }}
           >
             Entirely made by hand
           </h2>
@@ -167,7 +150,7 @@ export default function AboutPage() {
             className="font-display"
             style={{ fontSize: "1.3rem", fontStyle: "italic", color: "var(--sepia)", lineHeight: 1.8 }}
           >
-            "Each piece is designed to be discovered. From a distance, the work appears almost photographic — a pelican, a bee, a cricket rendered with startling realism. Step closer and the illusion gives way to something more intimate: hundreds of tiny hand cut fragments of magazine paper, each one chosen for its color, texture, and tone. Stay a little longer, and the background beneath begins to speak — details and layers that only reveal themselves to those who take the time to look."
+            &ldquo;Each piece is designed to be discovered. From a distance, the work appears almost photographic — a pelican, a bee, a mosquito rendered with startling realism. Step closer and the illusion gives way to something more intimate: hundreds of tiny hand cut fragments of magazine paper, each one chosen for its color, texture, and tone. Stay a little longer, and the background beneath begins to speak — details and layers that only reveal themselves to those who take the time to look.&rdquo;
           </p>
           <div className="mt-8 divider" />
         </div>
