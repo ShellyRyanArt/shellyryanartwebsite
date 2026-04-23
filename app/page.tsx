@@ -3,27 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const featuredWorks = [
-  {
-    src: "/images/gallery/bee.jpg",
-    title: "Saint of the Southern Hive",
-    medium: "Mixed Media Hand Cut Paper Collage",
-    year: "2024",
-  },
-  {
-    src: "/images/gallery/pelican.jpg",
-    title: "The Gulf Sentinel",
-    medium: "Mixed Media Hand Cut Paper Collage",
-    year: "2024",
-  },
-  {
-    src: "/images/gallery/cricket.jpg",
-    title: "Mascot of the Gulf Coast",
-    medium: "Mixed Media Hand Cut Paper Collage",
-    year: "2024",
-  },
-];
-
 export default function HomePage() {
   const [heroVisible, setHeroVisible] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -42,9 +21,8 @@ export default function HomePage() {
       <section
         ref={heroRef}
         className="relative flex items-center justify-center overflow-hidden"
-        style={{ minHeight: "100vh", background: "var(--parchment)" }}
+        style={{ minHeight: "85vh", background: "var(--parchment)" }}
       >
-        {/* Subtle dictionary texture background */}
         <div
           className="absolute inset-0 opacity-[0.035]"
           style={{
@@ -54,7 +32,6 @@ export default function HomePage() {
           }}
         />
 
-        {/* Main hero content */}
         <div
           className="relative z-10 text-center px-8"
           style={{
@@ -63,7 +40,6 @@ export default function HomePage() {
             transition: "opacity 1.2s ease, transform 1.2s ease",
           }}
         >
-          {/* Logo */}
           <div className="flex justify-center mb-8">
             <Image
               src="/images/logo/shelly-ryan-logo-transparent.png"
@@ -75,10 +51,8 @@ export default function HomePage() {
             />
           </div>
 
-          {/* Divider */}
           <div className="divider mb-8" />
 
-          {/* Tagline */}
           <p
             className="font-sans-light mx-auto"
             style={{
@@ -95,7 +69,6 @@ export default function HomePage() {
             Original Fine Art · Hand Cut Paper Collage
           </p>
 
-          {/* CTA */}
           <div
             className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center"
             style={{
@@ -142,7 +115,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
         <div
           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
           style={{
@@ -167,92 +139,52 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── FEATURED WORKS ── */}
-      <section
-        className="py-24 px-8"
-        style={{ background: "var(--ink)" }}
-      >
-        <div className="max-w-6xl mx-auto">
-          {/* Section header */}
-          <div className="text-center mb-16">
-            <p
-              className="font-sans-light mb-4"
-              style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--amber-light)" }}
-            >
-              Selected Works
-            </p>
-            <h2
-              className="font-display"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 300, color: "var(--parchment)", lineHeight: 1.2 }}
-            >
-              The Dictionary Series
-            </h2>
-            <div className="mt-6 divider" />
-          </div>
-
-          {/* Gallery grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
-            {featuredWorks.map((work, i) => (
-              <Link href="/gallery" key={i} className="art-card block group" style={{ aspectRatio: "1 / 1.1" }}>
-                <Image
-                  src={work.src}
-                  alt={work.title}
-                  width={600}
-                  height={660}
-                  className="art-card-img object-cover"
-                  style={{ height: "100%", width: "100%", objectFit: "cover" }}
-                />
-                <div className="art-card-overlay">
-                  <p
-                    className="font-sans-light mb-1"
-                    style={{ fontSize: "0.6rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--amber-light)" }}
-                  >
-                    {work.medium}
-                  </p>
-                  <h3
-                    className="font-display"
-                    style={{ fontSize: "1.6rem", fontWeight: 400, color: "var(--parchment)", lineHeight: 1.1 }}
-                  >
-                    {work.title}
-                  </h3>
-                  <p
-                    className="font-sans-light mt-1"
-                    style={{ fontSize: "0.65rem", color: "var(--parchment-deeper)", letterSpacing: "0.1em" }}
-                  >
-                    {work.year}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          {/* View all */}
-          <div className="text-center mt-12">
-            <Link
-              href="/gallery"
-              className="font-sans-light"
-              style={{
-                display: "inline-block",
-                padding: "0.875rem 3rem",
-                border: "1px solid rgba(196, 168, 90, 0.4)",
-                color: "var(--amber-light)",
-                fontSize: "0.7rem",
-                letterSpacing: "0.25em",
-                textTransform: "uppercase",
-                transition: "all 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                (e.target as HTMLElement).style.background = "rgba(196, 168, 90, 0.1)";
-                (e.target as HTMLElement).style.borderColor = "var(--amber-light)";
-              }}
-              onMouseLeave={(e) => {
-                (e.target as HTMLElement).style.background = "transparent";
-                (e.target as HTMLElement).style.borderColor = "rgba(196, 168, 90, 0.4)";
-              }}
-            >
-              View Full Gallery
-            </Link>
-          </div>
+      {/* ── FEATURED PIECE ── */}
+      <section className="py-24 px-8" style={{ background: "var(--parchment)" }}>
+        <div className="max-w-sm mx-auto text-center">
+          <p
+            className="font-sans-light mb-4"
+            style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--amber)" }}
+          >
+            Original Works
+          </p>
+          <h2
+            className="font-display mb-6"
+            style={{ fontSize: "clamp(1.8rem, 4vw, 2.75rem)", fontWeight: 300, color: "var(--ink)", lineHeight: 1.2 }}
+          >
+            Hand Cut Paper Collage
+          </h2>
+          <div className="mb-10 divider" />
+          <Link href="/gallery/mascot-of-the-gulf-coast" style={{ display: "inline-block" }}>
+            <Image
+              src="/images/gallery/cricket.jpg"
+              alt="Mascot of the Gulf Coast"
+              width={280}
+              height={280}
+              style={{ width: "280px", height: "auto", display: "block" }}
+            />
+          </Link>
+          <p
+            className="font-display mt-6 mb-10"
+            style={{ fontSize: "1rem", fontStyle: "italic", color: "var(--sepia)", lineHeight: 1.7 }}
+          >
+            Each piece is built by hand — hundreds of tiny fragments of magazine paper, layered onto pages from vintage dictionaries.
+          </p>
+          <Link
+            href="/gallery"
+            className="font-sans-light"
+            style={{
+              display: "inline-block",
+              padding: "0.875rem 3rem",
+              border: "1px solid var(--amber)",
+              color: "var(--amber)",
+              fontSize: "0.7rem",
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+            }}
+          >
+            See All Works
+          </Link>
         </div>
       </section>
 
@@ -278,12 +210,12 @@ export default function HomePage() {
               lineHeight: 1.6,
             }}
           >
-            "Each piece is designed to be discovered. From a distance, the work appears almost photographic. Step closer and the illusion gives way to something more intimate — hundreds of tiny hand cut fragments, each chosen with intention. Stay a little longer, and the background beneath begins to speak."
+            &ldquo;Each piece is designed to be discovered. From a distance, the work appears almost photographic. Step closer and the illusion gives way to something more intimate — hundreds of tiny hand cut fragments, each chosen with intention. Stay a little longer, and the background beneath begins to speak.&rdquo;
           </blockquote>
           <div className="mt-8 divider" />
           <p
-            className="mt-8 font-sans-light"
-            style={{ fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--sepia)" }}
+            className="mt-10 font-display"
+            style={{ fontSize: "2rem", fontWeight: 400, fontStyle: "italic", color: "var(--ink)", letterSpacing: "0.05em" }}
           >
             — Shelly Ryan
           </p>
@@ -296,12 +228,6 @@ export default function HomePage() {
         style={{ background: "var(--parchment-dark)" }}
       >
         <div className="max-w-xl mx-auto text-center">
-          <p
-            className="font-sans-light mb-4"
-            style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--sepia)" }}
-          >
-            Interested in a piece?
-          </p>
           <h2
             className="font-display mb-6"
             style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", fontWeight: 300, color: "var(--ink)", lineHeight: 1.2 }}
@@ -312,7 +238,8 @@ export default function HomePage() {
             className="font-display mb-10"
             style={{ fontSize: "1.1rem", fontStyle: "italic", color: "var(--sepia)", lineHeight: 1.8 }}
           >
-            Original works available. Inquiries welcome.
+            Original works available. Inquiries welcome.<br />
+            Each piece is sold with a certificate of authenticity.
           </p>
           <Link
             href="/contact"

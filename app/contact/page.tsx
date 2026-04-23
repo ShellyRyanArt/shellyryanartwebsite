@@ -58,7 +58,7 @@ export default function ContactPage() {
           className="mt-6 font-display mx-auto"
           style={{ fontSize: "1.1rem", fontStyle: "italic", color: "var(--sepia)", maxWidth: "480px", lineHeight: 1.8 }}
         >
-          For original work inquiries or general questions — Shelly would love to hear from you.
+          For work inquiries, purchasing information or general questions — Shelly would love to hear from you.
         </p>
       </section>
 
