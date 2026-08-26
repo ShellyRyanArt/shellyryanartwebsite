@@ -17,6 +17,13 @@
   "images": {
     "binding": "IMAGES",
   },
+  "send_email": [
+    {
+      "name": "CONTACT_EMAIL",
+      "destination_address": "shelly@shellyryan.art",
+      "allowed_sender_addresses": ["website@shellyryan.art"],
+    },
+  ],
   "observability": {
     "enabled": true,
   },

@@ -2,6 +2,8 @@
 
 Use Claude for layout, visual direction, new reusable page types, accessibility, or real feature work. Use Sanity for routine content.
 
+The Studio navigation includes **Design with Claude**. It turns four plain-language answers into a bounded prompt and opens Claude Code. This keeps Studio as Shelly's front door even though the code change still goes through a reviewable GitHub branch.
+
 ## Good Claude request
 
 > Make the French Series collection page feel more editorial. Preserve the existing typography and color tokens, keep collection membership CMS-owned, support long titles, and verify mobile and desktop. Do not deploy; show me the checked change first.

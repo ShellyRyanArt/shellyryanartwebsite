@@ -5,6 +5,7 @@ import { visionTool } from "@sanity/vision";
 import { dataset, projectId } from "@/sanity/env";
 import { schemaTypes } from "@/sanity/schemaTypes";
 import { structure } from "@/sanity/structure";
+import { DesignAssistantTool } from "@/sanity/tools/DesignAssistantTool";
 
 const singletonTypes = new Set([
   "homePage",
@@ -21,6 +22,14 @@ export default defineConfig({
   dataset,
   basePath: "/",
   plugins: [structureTool({ structure }), visionTool()],
+  tools: (previousTools) => [
+    ...previousTools,
+    {
+      name: "design-with-claude",
+      title: "Design with Claude",
+      component: DesignAssistantTool,
+    },
+  ],
   schema: {
     types: schemaTypes,
     templates: (templates) =>

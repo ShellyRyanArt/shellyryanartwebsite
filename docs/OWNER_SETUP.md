@@ -8,13 +8,21 @@ The code integration is complete without credentials. These one-time account ste
 2. Add the production domain, temporary `workers.dev` address, and `http://localhost:3000` to the project's CORS origins. Allow credentials for Studio login.
 3. Create a short-lived Editor token for migration.
 4. Copy `.env.example` to `.env.local` and add the project ID, dataset, and migration token.
-5. Run `npm run sanity:migrate` once. It uploads the six current artwork images, portrait, logo, collections, pages, and settings. The script refuses to overwrite an existing content dataset unless `--force` is explicitly supplied.
-6. Run `npm run sanity:deploy`, choose a memorable Sanity Studio hostname, and save the resulting URL.
+5. Run the **Set up Sanity content and Studio** GitHub workflow once. It uploads the six current artwork images, portrait, logo, collections, pages, and settings, then deploys the Studio. The migration refuses to overwrite existing site content.
+6. The Studio is deployed at `https://shelly-ryan-art.sanity.studio`.
 7. Open the hosted Studio, confirm every document, add Shelly as an Editor, then revoke the temporary migration token.
 
 The production dataset must be public for token-free website reads. Studio authentication still controls editing.
 
-## 2. Configure GitHub
+## 2. Enable contact-form email
+
+1. In Cloudflare, open **Compute → Email Service → Email Sending** and onboard `shellyryan.art`.
+2. Let Cloudflare create the SPF, DKIM, DMARC, and bounce-domain DNS records.
+3. Verify `shelly@shellyryan.art` as a permitted destination if Cloudflare requests it.
+
+The Worker binding is restricted to messages from `website@shellyryan.art` to `shelly@shellyryan.art`. Visitors' addresses are used only as Reply-To values. The form also validates same-origin requests, limits field sizes, and includes a hidden spam trap.
+
+## 3. Configure GitHub
 
 Add repository variables:
 
@@ -31,7 +39,7 @@ Add repository secrets:
 
 Pushes to `main` run all checks and deploy to Cloudflare Workers. The weekly backup workflow stores encrypted GitHub artifacts for 90 days.
 
-## 3. Put the site on Cloudflare
+## 4. Put the site on Cloudflare
 
 1. Run `npm run cf:build` locally once; then use the GitHub workflow or `npm run deploy` for the first Worker deployment.
 2. In the `shelly-ryan-art` Worker, add the Cloudflare-managed custom domain under **Settings → Domains & Routes**.
@@ -42,7 +50,7 @@ The repo intentionally uses the supported OpenNext adapter for this existing Nex
 
 The editor itself is hosted on Sanity's managed Studio service. `/studio` remains the client's stable shortcut, while the public Cloudflare Worker stays small and focused on the website.
 
-## 4. Recovery layers
+## 5. Recovery layers
 
 - Content edit: Sanity document history.
 - Dataset incident: weekly Sanity export artifact.

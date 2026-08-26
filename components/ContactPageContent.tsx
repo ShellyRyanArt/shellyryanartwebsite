@@ -17,16 +17,29 @@ export default function ContactPageContent({
     email: "",
     subject: "",
     message: "",
+    company: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [startedAt] = useState(() => Date.now());
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
 
-  function handleSubmit(event: React.FormEvent) {
+  async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    if (!contactEmail) return;
-    const subject = form.subject || "Website inquiry";
-    const body = `${form.message}\n\nFrom: ${form.name} (${form.email})`;
-    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSubmitted(true);
+    if (!contactEmail || status === "sending") return;
+    setStatus("sending");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, startedAt }),
+      });
+      if (!response.ok) throw new Error("Contact request failed");
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   }
 
   const inputClass =
@@ -82,7 +95,7 @@ export default function ContactPageContent({
                 Add the contact email in Site Settings to enable this form.
               </p>
             </div>
-          ) : submitted ? (
+          ) : status === "sent" ? (
             <div className="py-16 text-center">
               <h2 className="font-display mb-4 text-4xl italic">
                 {content.confirmationHeading}
@@ -93,6 +106,17 @@ export default function ContactPageContent({
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              <label className="sr-only" aria-hidden="true">
+                Company
+                <input
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.company}
+                  onChange={(e) =>
+                    setForm({ ...form, company: e.target.value })
+                  }
+                />
+              </label>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <label className="form-label">
                   Name
@@ -138,8 +162,24 @@ export default function ContactPageContent({
                   }
                 />
               </label>
-              <button type="submit" className="button-primary w-full">
-                Open email
+              {status === "error" && (
+                <p
+                  role="alert"
+                  className="font-display text-center text-red-800"
+                >
+                  We could not send your message. Please try again or email{" "}
+                  <a className="underline" href={`mailto:${contactEmail}`}>
+                    {contactEmail}
+                  </a>
+                  .
+                </p>
+              )}
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="button-primary w-full disabled:cursor-wait disabled:opacity-60"
+              >
+                {status === "sending" ? "Sending…" : "Send message"}
               </button>
             </form>
           )}

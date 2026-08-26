@@ -44,6 +44,6 @@ Open the affected document and open its document menu/history. Review the earlie
 
 Use **Studio** for artwork, photos, prices, availability, gallery links, collections, page wording, contact information, and newsletter links.
 
-Use **Claude** when you want a new layout, a new type of page, a visual redesign, different mobile behavior, direct sales, print editions, or another feature that the current forms do not offer.
+Use **Design with Claude** in Studio when you want a new layout, a new type of page, a visual redesign, different mobile behavior, direct sales, print editions, or another feature that the current forms do not offer.
 
-When asking Claude for a design change, say what should feel different and what must stay the same. Ask to see a checked version before deployment.
+Fill in the short design-request form, select **Copy request for Claude**, then **Open Claude Code**. Choose the Shelly Ryan Art repository and paste. The request already tells Claude about the design system, CMS boundaries, checks, preview, and safe-deployment rules. Review the preview before approving a merge to the live site.

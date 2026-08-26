@@ -5,9 +5,11 @@ A custom Next.js portfolio with a code-free Sanity Studio for normal content upd
 ## Editing model
 
 - Client content work: `/studio`
-- Design and feature work: repository changes governed by `CLAUDE.md`
+- Design and feature work: **Design with Claude** in Studio creates a bounded request for repository changes governed by `CLAUDE.md`
 - Production hosting: Cloudflare Workers through OpenNext
 - Source and deploy history: GitHub
+
+The contact form posts to the Cloudflare Worker and uses a restricted Email Service binding. It does not expose an API key or depend on the visitor's email application.
 
 ## Local development
 
