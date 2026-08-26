@@ -6,6 +6,16 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.shellyryan.art" }],
+        destination: "https://shellyryan.art/:path*",
+        permanent: true,
+      },
+    ];
+  },
   experimental: {
     useTypeScriptCli: false,
     webpackBuildWorker: false,
