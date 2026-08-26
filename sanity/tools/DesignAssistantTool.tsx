@@ -4,6 +4,18 @@ import { useMemo, useState } from "react";
 
 const repositoryUrl = "https://github.com/ShellyRyanArt/shellyryanartwebsite";
 
+const pageOptions = [
+  "Home",
+  "Gallery",
+  "Artwork detail",
+  "Collection / series",
+  "About",
+  "Process",
+  "Contact",
+  "Navigation or footer",
+  "Site-wide",
+];
+
 const fieldStyle: React.CSSProperties = {
   width: "100%",
   border: "1px solid #c9c0b4",
@@ -16,17 +28,20 @@ const fieldStyle: React.CSSProperties = {
 export function DesignAssistantTool() {
   const [request, setRequest] = useState({
     title: "",
+    page: "",
     pages: "",
     goal: "",
     keep: "",
   });
+  const [referenceImages, setReferenceImages] = useState<string[]>([]);
   const [copied, setCopied] = useState(false);
 
   const prompt = useMemo(
     () => `Work in ${repositoryUrl}.
 
 Design request: ${request.title || "[give this change a short name]"}
-Pages or areas: ${request.pages || "[list the pages or areas]"}
+Primary page or area: ${request.page || "[select a page or area]"}
+Other affected areas: ${request.pages || "None specified"}
 
 What I want:
 ${request.goal || "[describe the visual or feature change in plain language]"}
@@ -34,8 +49,11 @@ ${request.goal || "[describe the visual or feature change in plain language]"}
 What must stay the same:
 ${request.keep || "Keep the existing art, copy, navigation, and overall brand unless I specifically ask otherwise."}
 
+Reference images:
+${referenceImages.length ? `I will attach these reference images in Claude: ${referenceImages.join(", ")}. Use them for direction only; do not copy protected artwork or branding.` : "No reference images supplied."}
+
 Before changing code, read CLAUDE.md, docs/DESIGN_SYSTEM.md, and docs/CMS_SCHEMA.md. Sanity owns editable content; the repository owns design and features. Use the existing design tokens and components, work on a new branch, run npm run check, and provide a preview for approval. Do not deploy production, change DNS, publish CMS content, or add secrets.`,
-    [request],
+    [referenceImages, request],
   );
 
   async function copyPrompt() {
@@ -105,11 +123,28 @@ Before changing code, read CLAUDE.md, docs/DESIGN_SYSTEM.md, and docs/CMS_SCHEMA
             />
           </label>
           <label style={{ display: "grid", gap: "0.45rem", fontWeight: 600 }}>
-            Which pages or areas?
+            Which page or area?
+            <select
+              style={fieldStyle}
+              value={request.page}
+              onChange={(event) =>
+                setRequest({ ...request, page: event.currentTarget.value })
+              }
+            >
+              <option value="">Select one</option>
+              {pageOptions.map((page) => (
+                <option key={page} value={page}>
+                  {page}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label style={{ display: "grid", gap: "0.45rem", fontWeight: 600 }}>
+            Any other affected areas?
             <input
               style={fieldStyle}
               value={request.pages}
-              placeholder="Example: Collection pages on desktop and mobile"
+              placeholder="Optional: mobile menu, footer, or several collection pages"
               onChange={(event) =>
                 setRequest({ ...request, pages: event.currentTarget.value })
               }
@@ -139,11 +174,36 @@ Before changing code, read CLAUDE.md, docs/DESIGN_SYSTEM.md, and docs/CMS_SCHEMA
               }
             />
           </label>
+          <label style={{ display: "grid", gap: "0.45rem", fontWeight: 600 }}>
+            Reference images (optional)
+            <input
+              style={fieldStyle}
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={(event) =>
+                setReferenceImages(
+                  Array.from(event.currentTarget.files || []).map(
+                    (file) => file.name,
+                  ),
+                )
+              }
+            />
+            <span
+              style={{ color: "#665c54", fontSize: "0.9rem", fontWeight: 400 }}
+            >
+              {referenceImages.length
+                ? `${referenceImages.length} selected. Attach the same files after Claude opens.`
+                : "Screenshots, sketches, or visual references can be attached again in Claude."}
+            </span>
+          </label>
 
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
-            <button
-              type="button"
-              onClick={copyPrompt}
+            <a
+              href="https://claude.ai/code"
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => void copyPrompt()}
               style={{
                 border: 0,
                 borderRadius: "0.25rem",
@@ -152,25 +212,28 @@ Before changing code, read CLAUDE.md, docs/DESIGN_SYSTEM.md, and docs/CMS_SCHEMA
                 cursor: "pointer",
                 padding: "0.85rem 1.1rem",
                 fontWeight: 700,
-              }}
-            >
-              {copied ? "Copied — ready for Claude" : "Copy request for Claude"}
-            </button>
-            <a
-              href="https://claude.ai/code"
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                border: "1px solid #8a5b2f",
-                borderRadius: "0.25rem",
-                color: "#6d4323",
-                padding: "0.8rem 1.1rem",
-                fontWeight: 700,
                 textDecoration: "none",
               }}
             >
-              Open Claude Code
+              {copied
+                ? "Brief copied — continue in Claude"
+                : "Continue in Claude"}
             </a>
+            <button
+              type="button"
+              onClick={copyPrompt}
+              style={{
+                border: "1px solid #8a5b2f",
+                borderRadius: "0.25rem",
+                background: "transparent",
+                color: "#6d4323",
+                padding: "0.8rem 1.1rem",
+                fontWeight: 700,
+                cursor: "pointer",
+              }}
+            >
+              Copy brief only
+            </button>
           </div>
           <p style={{ margin: 0, color: "#665c54", lineHeight: 1.6 }}>
             In Claude, select the Shelly Ryan Art repository, paste the request,

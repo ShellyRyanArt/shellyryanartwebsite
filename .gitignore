@@ -44,6 +44,7 @@ cloudflare-env.d.ts
 
 # local Sanity exports
 backups/
+.sanity/
 
 # typescript
 *.tsbuildinfo
