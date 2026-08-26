@@ -5,6 +5,10 @@ import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import { getSiteSettings } from "@/sanity/lib/content";
 
+// The public site is CMS-driven. Render requests dynamically so published
+// Sanity edits appear without requiring a GitHub or Cloudflare redeploy.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Shelly Ryan Art",
   description:
