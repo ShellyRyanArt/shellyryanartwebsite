@@ -1,32 +1,32 @@
 import type { Metadata } from "next";
+
 import "./globals.css";
-import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import Navigation from "@/components/Navigation";
+import { getSiteSettings } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
   title: "Shelly Ryan Art",
-  description: "Original fine art by Shelly Ryan — hyperrealistic animals and nature subjects painted on vintage dictionary pages.",
-  keywords: "Shelly Ryan, art, original paintings, hyperrealism, dictionary art, nature art",
+  description: "Original fine art and hand cut paper collage by Shelly Ryan.",
+  keywords:
+    "Shelly Ryan, art, hand cut paper collage, Gulf Coast art, nature art",
   openGraph: {
     title: "Shelly Ryan Art",
-    description: "Original fine art painted on vintage dictionary pages.",
-    url: "https://shellyryan.art",
-    siteName: "Shelly Ryan Art",
+    description: "Original fine art and hand cut paper collage by Shelly Ryan.",
     type: "website",
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: Readonly<{ children: React.ReactNode }>) {
+  const settings = await getSiteSettings();
   return (
     <html lang="en">
       <body>
-        <Navigation />
+        <Navigation logo={settings.logo} />
         <main>{children}</main>
-        <Footer />
+        <Footer settings={settings} />
       </body>
     </html>
   );

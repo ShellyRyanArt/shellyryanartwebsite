@@ -1,0 +1,36 @@
+name: Set up Sanity content and Studio
+
+on:
+  workflow_dispatch:
+    inputs:
+      migrate_content:
+        description: Upload the current website content before deploying Studio
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ vars.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      NEXT_PUBLIC_SANITY_DATASET: ${{ vars.NEXT_PUBLIC_SANITY_DATASET }}
+      NEXT_PUBLIC_SANITY_API_VERSION: ${{ vars.NEXT_PUBLIC_SANITY_API_VERSION }}
+      SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+      SANITY_API_WRITE_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Validate Studio schema
+        run: npm run sanity:schema
+      - name: Migrate the existing website content
+        if: ${{ inputs.migrate_content }}
+        run: npm run sanity:migrate
+      - name: Deploy the client Studio
+        run: npm run sanity:deploy -- --yes

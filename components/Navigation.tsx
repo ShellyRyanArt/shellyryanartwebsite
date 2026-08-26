@@ -1,78 +1,93 @@
 "use client";
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
 
-export default function Navigation() {
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+import type { SiteImage } from "@/content/types";
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/about", label: "About" },
+  { href: "/process", label: "Process" },
+  { href: "/contact", label: "Contact" },
+];
+
+export default function Navigation({ logo }: { logo: SiteImage }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+      className="fixed inset-x-0 top-0 z-50 transition-all duration-500"
       style={{
-        backgroundColor: scrolled ? "rgba(244, 239, 228, 0.96)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(107, 90, 62, 0.15)" : "none",
-        padding: scrolled ? "0.75rem 2rem" : "1.5rem 2rem",
+        backgroundColor:
+          scrolled || menuOpen ? "rgba(244,239,228,.97)" : "transparent",
+        backdropFilter: scrolled || menuOpen ? "blur(12px)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(107,90,62,.15)" : "none",
+        padding: scrolled ? ".75rem 2rem" : "1.5rem 2rem",
       }}
     >
-      <nav className="max-w-6xl mx-auto flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="block" style={{ opacity: scrolled ? 1 : 0.95 }}>
+      <nav
+        className="mx-auto flex max-w-6xl items-center justify-between"
+        aria-label="Main navigation"
+      >
+        <Link href="/" aria-label="Shelly Ryan Art home">
           <Image
-            src="/images/logo/shelly-ryan-logo-transparent.png"
-            alt="Shelly Ryan Art"
+            src={logo.src}
+            alt={logo.alt}
             width={180}
             height={72}
-            style={{ height: scrolled ? "44px" : "56px", width: "auto", transition: "height 0.4s ease" }}
+            style={{
+              height: scrolled ? "44px" : "56px",
+              width: "auto",
+              transition: "height .4s ease",
+            }}
             priority
           />
         </Link>
-
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-10">
-          <Link href="/" className="nav-link">Home</Link>
-          <Link href="/gallery" className="nav-link">Gallery</Link>
-          <Link href="/about" className="nav-link">About</Link>
-          <Link href="/contact" className="nav-link">Contact</Link>
+        <div className="hidden items-center gap-8 md:flex">
+          {links.map((link) => (
+            <Link key={link.href} href={link.href} className="nav-link">
+              {link.label}
+            </Link>
+          ))}
         </div>
-
-        {/* Mobile hamburger */}
         <button
-          className="md:hidden flex flex-col items-center gap-1.5 p-2"
+          className="font-sans-light md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          style={{
+            fontSize: ".65rem",
+            letterSpacing: ".2em",
+            textTransform: "uppercase",
+          }}
         >
-          <span className="block w-6 h-px transition-all duration-300" style={{ background: "var(--ink)", transform: menuOpen ? "rotate(45deg) translate(2px, 2px)" : "" }} />
-          <span className="block w-6 h-px transition-all duration-300" style={{ background: "var(--ink)", opacity: menuOpen ? 0 : 1 }} />
-          <span className="block w-6 h-px transition-all duration-300" style={{ background: "var(--ink)", transform: menuOpen ? "rotate(-45deg) translate(2px, -2px)" : "" }} />
-          <span
-            className="font-sans-light"
-            style={{ fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--ink-light)", marginTop: "2px" }}
-          >
-            {menuOpen ? "Close" : "Menu"}
-          </span>
+          {menuOpen ? "Close" : "Menu"}
         </button>
       </nav>
-
-      {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden px-8 py-6 flex flex-col gap-6 border-t mt-2" style={{ borderColor: "rgba(107, 90, 62, 0.2)", background: "rgba(244, 239, 228, 0.98)" }}>
-          {["Home", "Gallery", "About", "Contact"].map((item) => (
+        <div
+          id="mobile-menu"
+          className="mt-3 flex flex-col gap-6 border-t px-4 py-6 md:hidden"
+          style={{ borderColor: "rgba(107,90,62,.2)" }}
+        >
+          {links.map((link) => (
             <Link
-              key={item}
-              href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+              key={link.href}
+              href={link.href}
               className="nav-link text-base"
               onClick={() => setMenuOpen(false)}
             >
-              {item}
+              {link.label}
             </Link>
           ))}
         </div>

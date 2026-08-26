@@ -4,25 +4,45 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check": "npm run lint && npm run typecheck && npm run test && npm run guardrails && npm run sanity:schema && npm run build",
+    "guardrails": "node scripts/verify-design-boundaries.mjs",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy -- --keep-vars",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "sanity:dev": "sanity dev",
+    "sanity:deploy": "sanity deploy",
+    "sanity:schema": "sanity schema validate",
+    "sanity:migrate": "tsx scripts/migrate-to-sanity.ts",
+    "sanity:export": "sanity dataset export production backups/sanity-production.tar.gz --yes"
   },
   "dependencies": {
-    "@vercel/analytics": "^1.6.1",
+    "@sanity/client": "7.26.2",
     "framer-motion": "^12.34.3",
-    "next": "16.1.6",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "next": "16.3.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "1.20.2",
+    "@sanity/icons": "5.2.1",
+    "@sanity/vision": "6.10.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.1.6",
+    "eslint-config-next": "16.3.2",
+    "sanity": "6.10.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "tsx": "4.23.12",
+    "typescript": "^5",
+    "vitest": "4.1.11",
+    "wrangler": "4.125.0"
   }
 }

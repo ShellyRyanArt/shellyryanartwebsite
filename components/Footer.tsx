@@ -1,48 +1,100 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function Footer() {
+import type { SiteSettings } from "@/content/types";
+
+export default function Footer({ settings }: { settings: SiteSettings }) {
   return (
     <footer
-      className="py-16 px-8"
-      style={{ borderTop: "1px solid rgba(107, 90, 62, 0.2)", background: "var(--parchment-dark)" }}
+      className="px-8 py-16"
+      style={{
+        borderTop: "1px solid rgba(107,90,62,.2)",
+        background: "var(--parchment-dark)",
+      }}
     >
-      <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          {/* Logo */}
+      <div className="mx-auto max-w-6xl">
+        {settings.newsletterSignupUrl && (
+          <section className="mb-14 text-center">
+            <h2 className="font-display mb-3 text-3xl">
+              {settings.newsletterHeading || "Studio notes"}
+            </h2>
+            {settings.newsletterBody && (
+              <p
+                className="font-display mx-auto mb-6 max-w-xl"
+                style={{ color: "var(--sepia)" }}
+              >
+                {settings.newsletterBody}
+              </p>
+            )}
+            <a
+              href={settings.newsletterSignupUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button-outline"
+            >
+              Join the email list
+            </a>
+          </section>
+        )}
+        <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
           <Image
-            src="/images/logo/shelly-ryan-logo-transparent.png"
-            alt="Shelly Ryan Art"
+            src={settings.logo.src}
+            alt={settings.logo.alt}
             width={140}
             height={56}
             style={{ height: "40px", width: "auto", opacity: 0.8 }}
           />
-
-          {/* Nav */}
-          <div className="flex items-center gap-8">
-            {["Gallery", "About", "Contact"].map((item) => (
-              <Link key={item} href={`/${item.toLowerCase()}`} className="nav-link">
-                {item}
-              </Link>
-            ))}
-          </div>
+          <nav
+            className="flex flex-wrap items-center justify-center gap-6"
+            aria-label="Footer navigation"
+          >
+            <Link href="/gallery" className="nav-link">
+              Gallery
+            </Link>
+            <Link href="/about" className="nav-link">
+              About
+            </Link>
+            <Link href="/process" className="nav-link">
+              Process
+            </Link>
+            <Link href="/contact" className="nav-link">
+              Contact
+            </Link>
+            {settings.instagramUrl && (
+              <a
+                href={settings.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nav-link"
+              >
+                Instagram
+              </a>
+            )}
+          </nav>
         </div>
-
-        {/* Divider */}
-        <div className="my-10 divider" />
-
+        <div className="divider my-10" />
         <div className="text-center">
           <p
             className="font-sans-light"
-            style={{ fontSize: "0.65rem", letterSpacing: "0.15em", color: "var(--sepia)", textTransform: "uppercase" }}
+            style={{
+              fontSize: ".65rem",
+              letterSpacing: ".15em",
+              color: "var(--sepia)",
+              textTransform: "uppercase",
+            }}
           >
-            © {new Date().getFullYear()} Shelly Ryan Art — All Rights Reserved
+            © {new Date().getFullYear()} {settings.footerCopyright}
           </p>
           <p
-            className="mt-2 font-sans-light"
-            style={{ fontSize: "0.65rem", letterSpacing: "0.12em", color: "var(--parchment-deeper)", textTransform: "uppercase" }}
+            className="font-sans-light mt-2"
+            style={{
+              fontSize: ".65rem",
+              letterSpacing: ".12em",
+              color: "var(--sepia)",
+              textTransform: "uppercase",
+            }}
           >
-            All artwork is original and may not be reproduced without permission
+            {settings.footerArtworkNotice}
           </p>
         </div>
       </div>

@@ -1,0 +1,30 @@
+name: Back up Sanity content
+
+on:
+  schedule:
+    - cron: "17 8 * * 1"
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ vars.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      NEXT_PUBLIC_SANITY_DATASET: ${{ vars.NEXT_PUBLIC_SANITY_DATASET }}
+      SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: mkdir -p backups
+      - run: npx sanity dataset export "$NEXT_PUBLIC_SANITY_DATASET" "backups/sanity-${{ github.run_id }}.tar.gz" --yes
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sanity-production-${{ github.run_id }}
+          path: backups/*.tar.gz
+          retention-days: 90

@@ -1,0 +1,30 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "shelly-ryan-art",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-08-26",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "shelly-ryan-art",
+    },
+  ],
+  "images": {
+    "binding": "IMAGES",
+  },
+  "send_email": [
+    {
+      "name": "CONTACT_EMAIL",
+      "destination_address": "shelly@shellyryan.art",
+      "allowed_sender_addresses": ["website@shellyryan.art"],
+    },
+  ],
+  "observability": {
+    "enabled": true,
+  },
+}
