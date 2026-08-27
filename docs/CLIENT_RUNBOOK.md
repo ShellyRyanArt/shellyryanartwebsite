@@ -48,9 +48,9 @@ Use **Studio** for artwork, photos, prices, availability, gallery links, collect
 
 Use **Design with Claude** in Studio when you want a new layout, a new type of page, a visual redesign, different mobile behavior, direct sales, print editions, or another feature that the current forms do not offer.
 
-Fill in the short design-request form and select **Continue in Claude**. Studio copies the complete brief and opens Claude Code in the browser. Choose the Shelly Ryan Art repository and paste the brief if it is not already present. Use **Copy brief only** when you want to save the request or open Claude separately.
+Open **Design with Claude** and answer the main question in your own words: **“Shelly, what do we want to change today?”** You can optionally identify the page or add reference images. Select **Continue in Claude**; Studio copies the complete brief and opens Claude Code in the browser. Choose the Shelly Ryan Art repository and paste the brief if it is not already present.
 
-The request already tells Claude about the design system, CMS boundaries, checks, preview, and safe-deployment rules. Review the preview before approving a merge to the live site.
+The request already tells Claude about the design system, CMS boundaries, checks, and safe-deployment rules. It also reminds Claude to create a branch, commit and push the finished work, open a pull request, and stop for your approval. After you approve, Claude merges the change and confirms the Cloudflare deployment.
 
 ## Why Studio has blank space on the right
 
