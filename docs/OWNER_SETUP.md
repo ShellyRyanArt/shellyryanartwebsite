@@ -37,7 +37,7 @@ Add repository secrets:
 - `CLOUDFLARE_API_TOKEN` with Workers Scripts edit permission
 - `SANITY_AUTH_TOKEN` with read/export permission for weekly backups
 
-Pushes to `main` run all checks and deploy to Cloudflare Workers. The weekly backup workflow stores encrypted GitHub artifacts for 90 days.
+Pushes to `main` run all checks and deploy to Cloudflare Workers. The weekly Sanity export and code-snapshot workflows retain recovery artifacts for 90 days. Code snapshots also create permanent dated Git tags.
 
 ## 4. Put the site on Cloudflare
 
@@ -54,7 +54,7 @@ The editor itself is hosted on Sanity's managed Studio service. `/studio` remain
 
 - Content edit: Sanity document history.
 - Dataset incident: weekly Sanity export artifact.
-- Code incident: GitHub branch/commit history.
+- Code incident: GitHub branch/commit history plus the weekly `snapshot/YYYY-MM-DD` tag and restorable Git bundle.
 - Deployment incident: Cloudflare Worker version rollback.
 
 Do not run a dataset migration, deploy production, change DNS, or rotate secrets as part of a normal client content update.
