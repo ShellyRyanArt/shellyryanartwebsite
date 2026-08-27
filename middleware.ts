@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-export function proxy(request: NextRequest) {
+export function middleware(request: NextRequest) {
   if (request.nextUrl.hostname !== "www.shellyryan.art") {
     return NextResponse.next();
   }
