@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { buildClaudeBrief } from "@/sanity/tools/designBrief";
+import {
+  buildClaudeBrief,
+  clientStatusTemplate,
+} from "@/sanity/tools/designBrief";
 
 describe("Design with Claude handoff", () => {
   it("carries the complete checked GitHub delivery workflow into Claude", () => {
@@ -16,7 +19,8 @@ describe("Design with Claude handoff", () => {
     expect(brief).toContain("Open a pull request into main");
     expect(brief).toContain("explicit approval before merging");
     expect(brief).toContain("confirm the Cloudflare deployment");
-    expect(brief).toContain("Delivery status — branch:");
+    expect(brief).toContain(clientStatusTemplate);
+    expect(brief).toContain("The steps above are behind-the-scenes mechanics");
   });
 
   it("keeps CMS content and production actions outside a design request", () => {
@@ -25,5 +29,13 @@ describe("Design with Claude handoff", () => {
     expect(brief).toContain("Sanity owns editable content");
     expect(brief).toContain("Do not publish Sanity content");
     expect(brief).toContain("Do not use a direct production deploy command");
+  });
+
+  it("keeps developer vocabulary out of Shelly's progress status", () => {
+    expect(clientStatusTemplate).not.toMatch(
+      /branch|commit|push|pull request|merge|deploy/i,
+    );
+    expect(clientStatusTemplate).toContain("ready for your review");
+    expect(clientStatusTemplate).toContain("live and checked");
   });
 });
