@@ -1,6 +1,5 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import { visionTool } from "@sanity/vision";
 
 import { dataset, projectId } from "@/sanity/env";
 import { schemaTypes } from "@/sanity/schemaTypes";
@@ -21,9 +20,9 @@ export default defineConfig({
   projectId,
   dataset,
   basePath: "/",
-  plugins: [structureTool({ structure }), visionTool()],
+  plugins: [structureTool({ structure })],
   tools: (previousTools) => [
-    ...previousTools,
+    ...previousTools.filter(({ name }) => name === "structure"),
     {
       name: "design-with-claude",
       title: "Design with Claude",

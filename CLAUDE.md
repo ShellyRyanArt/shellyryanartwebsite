@@ -19,11 +19,16 @@ This repository has two deliberately separate editing surfaces:
 
 1. Read `docs/DESIGN_SYSTEM.md`, `docs/CMS_SCHEMA.md`, and the affected page/component.
 2. State which content fields and responsive states the change touches.
-3. Work on a feature branch. Keep content and infrastructure boundaries intact.
+3. Work on a new feature branch. Never make design changes directly on `main`. Keep content and infrastructure boundaries intact.
 4. Test empty/long text, missing optional images, mobile width, desktop width, keyboard focus, and external links when applicable.
 5. Run `npm run check`. For visible changes, inspect the page at approximately 390 px and 1440 px widths.
-6. Explain the user-visible change and any CMS fields the client should use. Do not describe routine content changes as code changes.
+6. Commit every intended change, push the feature branch, and open a pull request into `main`. Do not leave finished work only in a local working tree.
+7. Give Shelly the pull-request link, preview or screenshots, validation results, and a plain-language summary. Then stop and ask for explicit approval before merging.
+8. Only after Shelly explicitly approves, merge the pull request into `main` and confirm that the resulting Cloudflare deployment succeeds. Report the live status before considering the request complete.
+9. Explain the user-visible change and any CMS fields the client should use. Do not describe routine content changes as code changes.
+
+End progress updates with the current state of: branch, checks, commit, push, pull request, approval, merge, and Cloudflare deployment. If authentication or permissions block a step, name the blocked step and the exact action Shelly needs to take.
 
 ## Deploy-safe rule
 
-`npm run deploy` is an external production action. A successful local `npm run check` or `npm run cf:build` does not authorize deployment. GitHub Actions deploys `main` only after the configured checks pass.
+`npm run deploy` is an external production action. A successful local `npm run check` or `npm run cf:build` does not authorize deployment. GitHub Actions deploys `main` only after the configured checks pass. A request to design or build is not approval to merge; Shelly must explicitly approve the reviewed change first.
