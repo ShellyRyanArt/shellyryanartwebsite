@@ -38,7 +38,9 @@ Open **Pages**, choose the page, edit its text or images, and publish. Site-wide
 
 ## Restore a mistake
 
-Open the affected document and open its document menu/history. Review the earlier version, restore the version you want, and publish it. If the mistake affects many documents or an older version is unavailable, ask the site owner to restore the weekly Sanity backup. The site code and deployments have separate GitHub and Cloudflare histories.
+Open the affected document and open its document menu/history. Review the earlier version, restore the version you want, and publish it. If the mistake affects many documents or an older version is unavailable, ask the site owner to restore the weekly Sanity backup.
+
+The site has three recovery layers: Sanity document history and a weekly content export, weekly GitHub code snapshots, and Cloudflare deployment history. Code snapshots create a permanent dated Git tag and retain a complete recovery bundle for 90 days.
 
 ## CMS or Claude?
 
@@ -46,4 +48,10 @@ Use **Studio** for artwork, photos, prices, availability, gallery links, collect
 
 Use **Design with Claude** in Studio when you want a new layout, a new type of page, a visual redesign, different mobile behavior, direct sales, print editions, or another feature that the current forms do not offer.
 
-Fill in the short design-request form, select **Copy request for Claude**, then **Open Claude Code**. Choose the Shelly Ryan Art repository and paste. The request already tells Claude about the design system, CMS boundaries, checks, preview, and safe-deployment rules. Review the preview before approving a merge to the live site.
+Fill in the short design-request form and select **Continue in Claude**. Studio copies the complete brief and opens Claude Code in the browser. Choose the Shelly Ryan Art repository and paste the brief if it is not already present. Use **Copy brief only** when you want to save the request or open Claude separately.
+
+The request already tells Claude about the design system, CMS boundaries, checks, preview, and safe-deployment rules. Review the preview before approving a merge to the live site.
+
+## Why Studio has blank space on the right
+
+That space is normal on Sanity's top-level Structure screen. Select **Artwork**, **Collections / Series**, **Pages**, or **Site Settings**; Sanity opens the list and editing panes in the open area.

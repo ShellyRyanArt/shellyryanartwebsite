@@ -1,0 +1,54 @@
+name: Snapshot website code
+
+on:
+  schedule:
+    - cron: "47 8 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: weekly-code-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Mark the current production code
+        id: snapshot
+        shell: bash
+        run: |
+          snapshot_date="$(date -u +%Y-%m-%d)"
+          snapshot_tag="snapshot/${snapshot_date}"
+          echo "date=${snapshot_date}" >> "$GITHUB_OUTPUT"
+          echo "tag=${snapshot_tag}" >> "$GITHUB_OUTPUT"
+
+          if git rev-parse --verify "refs/tags/${snapshot_tag}" >/dev/null 2>&1; then
+            echo "${snapshot_tag} already exists; leaving it unchanged."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git tag -a "${snapshot_tag}" "$GITHUB_SHA" -m "Weekly production code snapshot ${snapshot_date}"
+            git push origin "refs/tags/${snapshot_tag}"
+          fi
+
+      - name: Create a restorable repository bundle
+        shell: bash
+        run: |
+          mkdir -p backups
+          bundle="backups/shelly-ryan-art-${{ steps.snapshot.outputs.date }}.bundle"
+          git bundle create "$bundle" --all
+          git bundle verify "$bundle"
+
+      - name: Retain the recovery bundle for 90 days
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-code-${{ steps.snapshot.outputs.date }}
+          path: backups/*.bundle
+          if-no-files-found: error
+          retention-days: 90

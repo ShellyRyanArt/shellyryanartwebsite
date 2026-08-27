@@ -21,3 +21,10 @@ The Studio navigation includes **Design with Claude**. It turns four plain-langu
 > External actions: [none / deploy only after I approve / other explicit permission].
 
 Claude must read `CLAUDE.md`, `docs/DESIGN_SYSTEM.md`, and `docs/CMS_SCHEMA.md` before editing. Schema changes require a migration-compatible update across schema, queries, types, tests, and documentation.
+
+## Recovery boundaries
+
+- Every merged change remains in GitHub history.
+- The weekly code-snapshot workflow tags the current production commit and keeps a complete Git bundle for 90 days.
+- Cloudflare deployment history is the production rollback layer.
+- Sanity document history and the weekly dataset export protect content separately from code.
