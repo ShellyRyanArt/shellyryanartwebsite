@@ -1,6 +1,6 @@
 # Shelly Ryan Art — editing guide
 
-Your normal website work happens at **your website address followed by `/studio`**. You do not need GitHub, Cloudflare, a deployment, or code for the tasks in this guide.
+Your normal website work happens at **your website address followed by `/studio`**. You do not need technical accounts or code for the tasks in this guide.
 
 ## Add an artwork
 
@@ -15,7 +15,7 @@ Your normal website work happens at **your website address followed by `/studio`
 9. Add a price only when wanted. Turn on **Show price on the website** to display it.
 10. Check **Show on website**, choose a display-order number, and select **Publish**.
 
-Publishing updates the live site directly. It does not wait for a code deployment.
+Publishing updates the live site directly. There is no extra technical step.
 
 ## Edit an artwork
 
@@ -40,7 +40,7 @@ Open **Pages**, choose the page, edit its text or images, and publish. Site-wide
 
 Open the affected document and open its document menu/history. Review the earlier version, restore the version you want, and publish it. If the mistake affects many documents or an older version is unavailable, ask the site owner to restore the weekly Sanity backup.
 
-The site has three recovery layers: Sanity document history and a weekly content export, weekly GitHub code snapshots, and Cloudflare deployment history. Code snapshots create a permanent dated Git tag and retain a complete recovery bundle for 90 days.
+The site has three recovery layers: document history for individual edits, a weekly content backup, and protected copies of the website design and live versions. If an older version is needed, ask the site owner to restore it.
 
 ## CMS or Claude?
 
@@ -48,9 +48,9 @@ Use **Studio** for artwork, photos, prices, availability, gallery links, collect
 
 Use **Design with Claude** in Studio when you want a new layout, a new type of page, a visual redesign, different mobile behavior, direct sales, print editions, or another feature that the current forms do not offer.
 
-Fill in the short design-request form and select **Continue in Claude**. Studio copies the complete brief and opens Claude Code in the browser. Choose the Shelly Ryan Art repository and paste the brief if it is not already present. Use **Copy brief only** when you want to save the request or open Claude separately.
+Open **Design with Claude** and answer the main question in your own words: **“Shelly, what do we want to change today?”** You can optionally identify the page or add reference images. Select **Continue in Claude**; Studio copies the complete brief and opens Claude Code in the browser. Choose the Shelly Ryan Art repository and paste the brief if it is not already present.
 
-The request already tells Claude about the design system, CMS boundaries, checks, preview, and safe-deployment rules. Review the preview before approving a merge to the live site.
+The request already tells Claude about the design system, content boundaries, checks, and safety rules. Claude works in the background, prepares a review link, and stops for your approval. After you approve, Claude publishes the change and confirms that it is live and working.
 
 ## Why Studio has blank space on the right
 

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-const repositoryUrl = "https://github.com/ShellyRyanArt/shellyryanartwebsite";
+import { buildClaudeBrief } from "@/sanity/tools/designBrief";
 
 const pageOptions = [
   "Home",
@@ -16,44 +16,30 @@ const pageOptions = [
   "Site-wide",
 ];
 
-const fieldStyle: React.CSSProperties = {
+const ink = "#29231e";
+const umber = "#865a38";
+const paper = "#fffdf8";
+
+const smallFieldStyle: React.CSSProperties = {
   width: "100%",
-  border: "1px solid #c9c0b4",
-  borderRadius: "0.35rem",
-  background: "#fff",
+  border: "1px solid #d4c8b8",
+  borderRadius: "0.45rem",
+  background: paper,
+  color: ink,
   padding: "0.8rem",
   font: "inherit",
+  boxSizing: "border-box",
 };
 
 export function DesignAssistantTool() {
-  const [request, setRequest] = useState({
-    title: "",
-    page: "",
-    pages: "",
-    goal: "",
-    keep: "",
-  });
+  const [goal, setGoal] = useState("");
+  const [page, setPage] = useState("");
   const [referenceImages, setReferenceImages] = useState<string[]>([]);
   const [copied, setCopied] = useState(false);
 
   const prompt = useMemo(
-    () => `Work in ${repositoryUrl}.
-
-Design request: ${request.title || "[give this change a short name]"}
-Primary page or area: ${request.page || "[select a page or area]"}
-Other affected areas: ${request.pages || "None specified"}
-
-What I want:
-${request.goal || "[describe the visual or feature change in plain language]"}
-
-What must stay the same:
-${request.keep || "Keep the existing art, copy, navigation, and overall brand unless I specifically ask otherwise."}
-
-Reference images:
-${referenceImages.length ? `I will attach these reference images in Claude: ${referenceImages.join(", ")}. Use them for direction only; do not copy protected artwork or branding.` : "No reference images supplied."}
-
-Before changing code, read CLAUDE.md, docs/DESIGN_SYSTEM.md, and docs/CMS_SCHEMA.md. Sanity owns editable content; the repository owns design and features. Use the existing design tokens and components, work on a new branch, run npm run check, and provide a preview for approval. Do not deploy production, change DNS, publish CMS content, or add secrets.`,
-    [referenceImages, request],
+    () => buildClaudeBrief({ goal, page, referenceImages }),
+    [goal, page, referenceImages],
   );
 
   async function copyPrompt() {
@@ -67,180 +53,217 @@ Before changing code, read CLAUDE.md, docs/DESIGN_SYSTEM.md, and docs/CMS_SCHEMA
       style={{
         minHeight: "100%",
         overflow: "auto",
-        background: "#f4efe4",
-        color: "#211c18",
-        padding: "clamp(1.25rem, 4vw, 3rem)",
+        background:
+          "radial-gradient(circle at 82% 8%, rgba(151, 116, 79, 0.12), transparent 28rem), #f3eee5",
+        color: ink,
+        padding: "clamp(1.25rem, 5vw, 4rem)",
       }}
     >
-      <div style={{ margin: "0 auto", maxWidth: "48rem" }}>
+      <div style={{ margin: "0 auto", maxWidth: "58rem" }}>
         <p
           style={{
-            margin: "0 0 0.5rem",
-            color: "#8a5b2f",
-            fontSize: "0.75rem",
-            fontWeight: 700,
-            letterSpacing: "0.14em",
+            margin: "0 0 0.75rem",
+            color: umber,
+            fontSize: "0.72rem",
+            fontWeight: 750,
+            letterSpacing: "0.16em",
             textTransform: "uppercase",
           }}
         >
-          Larger changes
+          A place to begin
         </p>
         <h1
           style={{
+            maxWidth: "48rem",
             margin: 0,
-            fontFamily: "Georgia, serif",
-            fontSize: "2.4rem",
+            fontFamily: "Georgia, 'Times New Roman', serif",
+            fontSize: "clamp(2.2rem, 6vw, 4.4rem)",
+            fontWeight: 400,
+            letterSpacing: "-0.035em",
+            lineHeight: 1.02,
           }}
         >
-          Design with Claude
+          Shelly, what do we want to change today?
         </h1>
-        <p style={{ maxWidth: "42rem", lineHeight: 1.7 }}>
-          Use this for layout, styling, or new features. For artwork, prices,
-          availability, images, collections, or page wording, use the Content
-          section instead.
+        <p
+          style={{
+            maxWidth: "40rem",
+            margin: "1rem 0 0",
+            color: "#655b52",
+            fontSize: "1.05rem",
+            lineHeight: 1.7,
+          }}
+        >
+          Describe it the way you would to a creative partner. A rough thought
+          is enough—Claude can help shape the idea with you.
         </p>
 
         <section
           style={{
-            display: "grid",
-            gap: "1rem",
-            marginTop: "2rem",
-            padding: "clamp(1.25rem, 4vw, 2rem)",
-            background: "#fffdf9",
-            border: "1px solid #ddd2c3",
-            boxShadow: "0 1rem 3rem rgba(50, 35, 20, 0.08)",
+            marginTop: "clamp(2rem, 6vw, 4rem)",
+            overflow: "hidden",
+            background: paper,
+            border: "1px solid #ded4c6",
+            borderRadius: "0.7rem",
+            boxShadow: "0 1.5rem 4rem rgba(62, 47, 31, 0.09)",
           }}
         >
-          <label style={{ display: "grid", gap: "0.45rem", fontWeight: 600 }}>
-            Give the change a short name
-            <input
-              style={fieldStyle}
-              value={request.title}
-              placeholder="Example: Make the collection pages feel more editorial"
-              onChange={(event) =>
-                setRequest({ ...request, title: event.currentTarget.value })
-              }
-            />
-          </label>
-          <label style={{ display: "grid", gap: "0.45rem", fontWeight: 600 }}>
-            Which page or area?
-            <select
-              style={fieldStyle}
-              value={request.page}
-              onChange={(event) =>
-                setRequest({ ...request, page: event.currentTarget.value })
-              }
-            >
-              <option value="">Select one</option>
-              {pageOptions.map((page) => (
-                <option key={page} value={page}>
-                  {page}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label style={{ display: "grid", gap: "0.45rem", fontWeight: 600 }}>
-            Any other affected areas?
-            <input
-              style={fieldStyle}
-              value={request.pages}
-              placeholder="Optional: mobile menu, footer, or several collection pages"
-              onChange={(event) =>
-                setRequest({ ...request, pages: event.currentTarget.value })
-              }
-            />
-          </label>
-          <label style={{ display: "grid", gap: "0.45rem", fontWeight: 600 }}>
-            Describe what you want
-            <textarea
-              style={fieldStyle}
-              rows={6}
-              value={request.goal}
-              placeholder="Write naturally. Include the feeling, behavior, or examples you have in mind."
-              onChange={(event) =>
-                setRequest({ ...request, goal: event.currentTarget.value })
-              }
-            />
-          </label>
-          <label style={{ display: "grid", gap: "0.45rem", fontWeight: 600 }}>
-            What should Claude preserve?
-            <textarea
-              style={fieldStyle}
-              rows={3}
-              value={request.keep}
-              placeholder="Optional: colors, typography, a section you already like, or content that must not change"
-              onChange={(event) =>
-                setRequest({ ...request, keep: event.currentTarget.value })
-              }
-            />
-          </label>
-          <label style={{ display: "grid", gap: "0.45rem", fontWeight: 600 }}>
-            Reference images (optional)
-            <input
-              style={fieldStyle}
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={(event) =>
-                setReferenceImages(
-                  Array.from(event.currentTarget.files || []).map(
-                    (file) => file.name,
-                  ),
-                )
-              }
-            />
+          <label style={{ display: "block" }}>
             <span
-              style={{ color: "#665c54", fontSize: "0.9rem", fontWeight: 400 }}
+              style={{
+                display: "block",
+                padding: "1.25rem clamp(1.25rem, 4vw, 2.25rem) 0",
+                fontFamily: "Georgia, 'Times New Roman', serif",
+                fontSize: "1.2rem",
+              }}
             >
-              {referenceImages.length
-                ? `${referenceImages.length} selected. Attach the same files after Claude opens.`
-                : "Screenshots, sketches, or visual references can be attached again in Claude."}
+              Tell me what you&apos;re imagining
             </span>
+            <textarea
+              autoFocus
+              rows={9}
+              value={goal}
+              placeholder="Maybe the home page should feel quieter and more like walking into a gallery…"
+              onChange={(event) => setGoal(event.currentTarget.value)}
+              style={{
+                width: "100%",
+                resize: "vertical",
+                border: 0,
+                background: "transparent",
+                color: ink,
+                padding: "1rem clamp(1.25rem, 4vw, 2.25rem) 1.5rem",
+                font: "400 1.12rem/1.75 Georgia, 'Times New Roman', serif",
+                boxSizing: "border-box",
+              }}
+            />
           </label>
 
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
-            <a
-              href="https://claude.ai/code"
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => void copyPrompt()}
+          <details
+            style={{
+              borderTop: "1px solid #e7ded2",
+              padding: "1rem clamp(1.25rem, 4vw, 2.25rem)",
+            }}
+          >
+            <summary
               style={{
-                border: 0,
-                borderRadius: "0.25rem",
-                background: "#8a5b2f",
-                color: "white",
+                color: "#675d54",
                 cursor: "pointer",
-                padding: "0.85rem 1.1rem",
-                fontWeight: 700,
-                textDecoration: "none",
+                fontWeight: 650,
               }}
             >
-              {copied
-                ? "Brief copied — continue in Claude"
-                : "Continue in Claude"}
-            </a>
-            <button
-              type="button"
-              onClick={copyPrompt}
+              Add a page or reference image, if helpful
+            </summary>
+            <div
               style={{
-                border: "1px solid #8a5b2f",
-                borderRadius: "0.25rem",
-                background: "transparent",
-                color: "#6d4323",
-                padding: "0.8rem 1.1rem",
-                fontWeight: 700,
-                cursor: "pointer",
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(15rem, 1fr))",
+                gap: "1rem",
+                padding: "1.25rem 0 0.5rem",
               }}
             >
-              Copy brief only
-            </button>
-          </div>
-          <p style={{ margin: 0, color: "#665c54", lineHeight: 1.6 }}>
-            In Claude, select the Shelly Ryan Art repository, paste the request,
-            and ask for a preview. Approve the preview before anything is merged
-            into the live site.
-          </p>
+              <label style={{ display: "grid", gap: "0.45rem" }}>
+                <span style={{ fontSize: "0.9rem", fontWeight: 650 }}>
+                  Page or area
+                </span>
+                <select
+                  style={smallFieldStyle}
+                  value={page}
+                  onChange={(event) => setPage(event.currentTarget.value)}
+                >
+                  <option value="">Let Claude work it out</option>
+                  {pageOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label style={{ display: "grid", gap: "0.45rem" }}>
+                <span style={{ fontSize: "0.9rem", fontWeight: 650 }}>
+                  Reference images
+                </span>
+                <input
+                  style={smallFieldStyle}
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={(event) =>
+                    setReferenceImages(
+                      Array.from(event.currentTarget.files || []).map(
+                        (file) => file.name,
+                      ),
+                    )
+                  }
+                />
+                <span style={{ color: "#71675e", fontSize: "0.82rem" }}>
+                  {referenceImages.length
+                    ? `${referenceImages.length} selected. Attach them again when Claude opens.`
+                    : "Screenshots, sketches, or visual inspiration."}
+                </span>
+              </label>
+            </div>
+          </details>
         </section>
+
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "1.25rem",
+            marginTop: "1.25rem",
+          }}
+        >
+          <p
+            style={{
+              margin: 0,
+              color: "#675d54",
+              fontSize: "0.9rem",
+              lineHeight: 1.55,
+            }}
+          >
+            Claude will check the work, prepare it for your review, and ask you
+            before publishing it to the live site.
+          </p>
+          <a
+            href="https://claude.ai/code"
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => void copyPrompt()}
+            style={{
+              display: "inline-flex",
+              justifyContent: "center",
+              borderRadius: "999px",
+              background: ink,
+              color: "#fffdf8",
+              padding: "0.95rem 1.35rem",
+              fontWeight: 700,
+              textDecoration: "none",
+              boxShadow: "0 0.55rem 1.2rem rgba(41, 35, 30, 0.16)",
+            }}
+          >
+            {copied ? "Copied—continue in Claude" : "Continue in Claude →"}
+          </a>
+        </div>
+
+        <aside
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(12rem, 1fr))",
+            gap: "0.8rem",
+            marginTop: "clamp(2.5rem, 7vw, 5rem)",
+            paddingTop: "1.25rem",
+            borderTop: "1px solid #d6ccbf",
+            color: "#675d54",
+            fontSize: "0.82rem",
+            lineHeight: 1.5,
+          }}
+        >
+          <span>01 · Claude works safely in the background.</span>
+          <span>02 · You get a review link before anything changes.</span>
+          <span>03 · Nothing is published until you approve.</span>
+        </aside>
       </div>
     </main>
   );
