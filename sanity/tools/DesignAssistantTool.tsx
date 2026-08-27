@@ -223,8 +223,8 @@ export function DesignAssistantTool() {
               lineHeight: 1.55,
             }}
           >
-            Claude will check the work, save it to GitHub, and ask you before
-            merging it into the live site.
+            Claude will check the work, prepare it for your review, and ask you
+            before publishing it to the live site.
           </p>
           <a
             href="https://claude.ai/code"
@@ -260,9 +260,9 @@ export function DesignAssistantTool() {
             lineHeight: 1.5,
           }}
         >
-          <span>01 · Claude works on a separate branch.</span>
-          <span>02 · Checks and a review link come first.</span>
-          <span>03 · Nothing merges until you approve.</span>
+          <span>01 · Claude works safely in the background.</span>
+          <span>02 · You get a review link before anything changes.</span>
+          <span>03 · Nothing is published until you approve.</span>
         </aside>
       </div>
     </main>
