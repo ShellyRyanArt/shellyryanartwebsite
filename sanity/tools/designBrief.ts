@@ -7,6 +7,9 @@ export type DesignBriefInput = {
   referenceImages?: string[];
 };
 
+export const clientStatusTemplate =
+  "Design status — [shaping the idea / preparing your review / ready for your review / waiting for your approval / publishing / live and checked]";
+
 export function buildClaudeBrief({
   goal,
   page,
@@ -44,8 +47,14 @@ Carry this delivery workflow through the entire session:
 6. Stop and ask Shelly for explicit approval before merging. A request to design or build is not approval to merge.
 7. After Shelly explicitly approves, merge the pull request into main, confirm the Cloudflare deployment completes successfully, and report the live status. Do not use a direct production deploy command.
 
-If permissions or authentication prevent committing, pushing, opening the pull request, merging, or checking deployment, say exactly which step is blocked and what Shelly needs to do. Do not silently stop before the GitHub handoff is complete.
+Client-language contract:
+- The steps above are behind-the-scenes mechanics. Never ask Shelly to manage them or describe routine progress using the words branch, commit, push, pull request, merge, main, deploy, or deployment.
+- Say “working safely in the background” while building, “ready for your review” when the review version is available, “waiting for your approval” at the approval gate, “publishing” after approval, and “live and checked” after the live-site check succeeds.
+- Call the pull-request or preview URL the “review link.” Call merging and deployment “publishing the approved change.”
+- If a behind-the-scenes permission blocks delivery, explain the result in Shelly's language and give one plain next action. Put technical details in a clearly labeled note for the site owner only when they are actually needed.
 
-End every progress update with this compact checklist so the handoff cannot be forgotten:
-Delivery status — branch: [status] · checks: [status] · committed: [status] · pushed: [status] · PR: [status] · approval: [waiting/approved] · merged: [status] · Cloudflare: [status]`;
+Do not silently stop before the behind-the-scenes handoff is complete.
+
+End every progress update with this client-facing status line so the handoff cannot be forgotten:
+${clientStatusTemplate}`;
 }
