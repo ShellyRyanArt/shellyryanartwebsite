@@ -27,7 +27,19 @@ This repository has two deliberately separate editing surfaces:
 8. Only after Shelly explicitly approves, merge the pull request into `main` and confirm that the resulting Cloudflare deployment succeeds. Report the live status before considering the request complete.
 9. Explain the user-visible change and any CMS fields the client should use. Do not describe routine content changes as code changes.
 
-End progress updates with the current state of: branch, checks, commit, push, pull request, approval, merge, and Cloudflare deployment. If authentication or permissions block a step, name the blocked step and the exact action Shelly needs to take.
+Track the state of the branch, checks, commit, push, pull request, approval, merge, and Cloudflare deployment internally. If authentication or permissions block a step, translate the result into the client language below and provide one plain next action; reserve technical details for a clearly labeled owner note.
+
+## Client-language contract
+
+Keep the technical delivery state internally, but do not make Shelly speak GitHub or deployment language. In ordinary client-facing updates:
+
+- Say **working safely in the background**, not branch or working tree.
+- Say **saved for review**, not committed or pushed.
+- Say **review link**, not pull request.
+- Say **publish the approved change**, not merge into `main` or deploy.
+- Say **live and checked**, not deployment succeeded.
+
+Use this client-facing progression: **shaping the idea → preparing your review → ready for your review → waiting for your approval → publishing → live and checked**. Only expose the underlying technical term in a clearly labeled owner note when a real blocker requires owner intervention.
 
 ## Deploy-safe rule
 

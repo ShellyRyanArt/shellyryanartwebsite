@@ -2,7 +2,10 @@
 
 import { useMemo, useState } from "react";
 
-import { buildClaudeBrief } from "@/sanity/tools/designBrief";
+import {
+  buildClaudeBrief,
+  buildClaudeLaunchUrl,
+} from "@/sanity/tools/designBrief";
 
 const pageOptions = [
   "Home",
@@ -35,18 +38,15 @@ export function DesignAssistantTool() {
   const [goal, setGoal] = useState("");
   const [page, setPage] = useState("");
   const [referenceImages, setReferenceImages] = useState<string[]>([]);
-  const [copied, setCopied] = useState(false);
 
   const prompt = useMemo(
     () => buildClaudeBrief({ goal, page, referenceImages }),
     [goal, page, referenceImages],
   );
-
-  async function copyPrompt() {
-    await navigator.clipboard.writeText(prompt);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 2500);
-  }
+  const claudeLaunchUrl = useMemo(
+    () => buildClaudeLaunchUrl(prompt),
+    [prompt],
+  );
 
   return (
     <main
@@ -197,7 +197,7 @@ export function DesignAssistantTool() {
                 />
                 <span style={{ color: "#71675e", fontSize: "0.82rem" }}>
                   {referenceImages.length
-                    ? `${referenceImages.length} selected. Attach them again when Claude opens.`
+                    ? `${referenceImages.length} selected. Your written request will carry over; add the actual images once Claude opens.`
                     : "Screenshots, sketches, or visual inspiration."}
                 </span>
               </label>
@@ -223,14 +223,19 @@ export function DesignAssistantTool() {
               lineHeight: 1.55,
             }}
           >
-            Claude will check the work, save it to GitHub, and ask you before
-            merging it into the live site.
+            Your request and the Shelly Ryan Art website will already be
+            selected when Claude opens. Claude will prepare the work for your
+            review and ask before publishing it.
           </p>
           <a
-            href="https://claude.ai/code"
+            href={claudeLaunchUrl}
             target="_blank"
             rel="noreferrer"
-            onClick={() => void copyPrompt()}
+            onClick={() => {
+              // The supported Claude deep link carries the brief. A clipboard
+              // copy is only a quiet fallback if Claude ever strips the query.
+              void navigator.clipboard?.writeText(prompt).catch(() => undefined);
+            }}
             style={{
               display: "inline-flex",
               justifyContent: "center",
@@ -243,7 +248,7 @@ export function DesignAssistantTool() {
               boxShadow: "0 0.55rem 1.2rem rgba(41, 35, 30, 0.16)",
             }}
           >
-            {copied ? "Copied—continue in Claude" : "Continue in Claude →"}
+            Open in Claude with my request →
           </a>
         </div>
 
@@ -260,9 +265,9 @@ export function DesignAssistantTool() {
             lineHeight: 1.5,
           }}
         >
-          <span>01 · Claude works on a separate branch.</span>
-          <span>02 · Checks and a review link come first.</span>
-          <span>03 · Nothing merges until you approve.</span>
+          <span>01 · Claude works safely in the background.</span>
+          <span>02 · You get a review link before anything changes.</span>
+          <span>03 · Nothing is published until you approve.</span>
         </aside>
       </div>
     </main>
