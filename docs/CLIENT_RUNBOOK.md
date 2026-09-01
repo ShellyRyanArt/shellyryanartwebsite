@@ -42,6 +42,23 @@ Open the affected document and open its document menu/history. Review the earlie
 
 The site has three recovery layers: document history for individual edits, a weekly content backup, and protected copies of the website design and live versions. If an older version is needed, ask the site owner to restore it.
 
+## Create a Certificate of Authenticity
+
+1. Open Studio and choose **Create a Certificate**.
+2. Choose an artwork already saved in Studio. Its title, medium, dimensions,
+   year, and original main photo will fill in automatically.
+3. For a new piece, choose **Type details for a new artwork**, enter the details,
+   and attach the original JPG or PNG. You do not need to convert it to PDF or
+   upload it anywhere else.
+4. Check the certificate preview. The photo is always fitted without cropping.
+5. Choose **Create certificate**. In the print window, select **Save as PDF**,
+   Letter paper, 100% scale, and no margins. You can also print directly.
+
+If Studio warns that a photo may print softly, attach the largest original photo
+available. Creating a certificate does not change the artwork or website, and a
+newly attached photo stays on the device unless you separately save it as the
+artwork's main image.
+
 ## CMS or Claude?
 
 Use **Studio** for artwork, photos, prices, availability, gallery links, collections, page wording, contact information, and newsletter links.
