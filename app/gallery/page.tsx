@@ -54,14 +54,19 @@ export default async function GalleryPage() {
               href={`/gallery/${artwork.slug}`}
               className="artwork-card"
             >
-              <div className="relative aspect-square overflow-hidden">
-                <Image
-                  src={artwork.mainImage.src}
-                  alt={artwork.mainImage.alt}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  style={{ objectFit: "cover" }}
-                />
+              <div
+                className="relative aspect-square overflow-hidden p-4"
+                style={{ background: "var(--parchment-dark)" }}
+              >
+                <div className="relative h-full w-full">
+                  <Image
+                    src={artwork.mainImage.src}
+                    alt={artwork.mainImage.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    style={{ objectFit: "contain" }}
+                  />
+                </div>
               </div>
               <div
                 className="border-b px-2 pb-8 pt-4 text-center"
