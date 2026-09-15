@@ -25,7 +25,8 @@ export default async function GalleryPage() {
           }}
         >
           Each work is a hand cut paper collage — built from magazine fragments
-          and layered by hand onto pages from vintage dictionaries.
+          and layered by hand onto vintage papers and other carefully chosen
+          surfaces.
         </p>
       </section>
 

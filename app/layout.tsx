@@ -12,13 +12,13 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Shelly Ryan Art",
   description:
-    "Original fine art by Shelly Ryan — hyperrealistic animals and nature subjects in hand cut paper collage on vintage dictionary pages.",
+    "Original fine art by Shelly Ryan — hyperrealistic animals and nature subjects in hand cut paper collage on vintage papers and other carefully chosen surfaces.",
   keywords:
     "Shelly Ryan, art, hand cut paper collage, Gulf Coast art, nature art",
   openGraph: {
     title: "Shelly Ryan Art",
     description:
-      "Original fine art in hand cut paper collage on vintage dictionary pages.",
+      "Original fine art in hand cut paper collage on vintage papers and other carefully chosen surfaces.",
     url: "https://shellyryan.art",
     siteName: "Shelly Ryan Art",
     type: "website",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     title: "Shelly Ryan Art",
     description:
-      "Original fine art in hand cut paper collage on vintage dictionary pages.",
+      "Original fine art in hand cut paper collage on vintage papers and other carefully chosen surfaces.",
   },
 };
 
