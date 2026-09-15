@@ -27,20 +27,36 @@ import {
   siteSettingsQuery,
 } from "@/sanity/lib/queries";
 
+// If Sanity is slow or unresponsive, abort the request rather than let it hang.
+// A hung fetch can exhaust the Cloudflare Worker's resource limits and return a
+// site-wide error; timing out lets us fall back to the local snapshot instead.
+const CONTENT_FETCH_TIMEOUT_MS = 8000;
+
 async function fetchPublished<T>(
   query: string,
   params: Record<string, string> = {},
 ): Promise<T | undefined> {
   if (!isSanityConfigured) return undefined;
 
+  const controller = new AbortController();
+  const timeout = setTimeout(
+    () => controller.abort(),
+    CONTENT_FETCH_TIMEOUT_MS,
+  );
+
   try {
-    return await sanityClient.fetch<T>(query, params, { cache: "no-store" });
+    return await sanityClient.fetch<T>(query, params, {
+      cache: "no-store",
+      signal: controller.signal,
+    });
   } catch (error) {
     console.error(
-      "Sanity content fetch failed; serving the safe local snapshot.",
+      "Sanity content fetch failed or timed out; serving the safe local snapshot.",
       error,
     );
     return undefined;
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
