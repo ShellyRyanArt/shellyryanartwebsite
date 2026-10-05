@@ -19,7 +19,7 @@
     "sanity:deploy": "sanity deploy",
     "sanity:schema": "sanity schema validate",
     "sanity:migrate": "tsx scripts/migrate-to-sanity.ts",
-    "sanity:export": "sanity dataset export production backups/sanity-production.tar.gz --yes"
+    "sanity:export": "sanity dataset export production backups/sanity-production.tar.gz --overwrite"
   },
   "dependencies": {
     "@sanity/client": "7.26.2",
