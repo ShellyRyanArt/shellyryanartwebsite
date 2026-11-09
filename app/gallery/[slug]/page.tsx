@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -31,7 +32,6 @@ export default async function ArtworkPage({ params }: Props) {
   const cta = getArtworkCta(artwork);
   const price = getVisiblePrice(artwork);
   const availabilityLabel = getAvailabilityLabel(artwork.availability);
-  const images = [artwork.mainImage, ...artwork.detailImages];
 
   return (
     <div style={{ background: "var(--parchment)", minHeight: "100vh" }}>
@@ -45,35 +45,49 @@ export default async function ArtworkPage({ params }: Props) {
 
       <section className="px-8 pb-24">
         <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-16 md:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)]">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {images.map((image, index) => (
-              <figure
-                key={`${image.src}-${index}`}
-                className={index === 0 ? "sm:col-span-2" : ""}
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  width={1200}
-                  height={1200}
-                  sizes={
-                    index === 0
-                      ? "(max-width: 768px) 100vw, 60vw"
-                      : "(max-width: 768px) 100vw, 30vw"
-                  }
-                  style={{ width: "100%", height: "auto", display: "block" }}
-                  priority={index === 0}
-                />
-                {image.caption && (
-                  <figcaption
-                    className="font-sans-light mt-2 text-center"
-                    style={{ fontSize: "0.65rem", color: "var(--sepia)" }}
-                  >
-                    {image.caption}
-                  </figcaption>
-                )}
-              </figure>
-            ))}
+          <div>
+            <figure>
+              <Image
+                src={artwork.mainImage.src}
+                alt={artwork.mainImage.alt}
+                width={1200}
+                height={1200}
+                sizes="(max-width: 768px) 100vw, 60vw"
+                style={{ width: "100%", height: "auto", display: "block" }}
+                priority
+              />
+              {artwork.mainImage.caption && (
+                <ImageCaption>{artwork.mainImage.caption}</ImageCaption>
+              )}
+            </figure>
+
+            {/* Close-ups sit in a row of small squares under the full piece.
+                Only close-ups are cropped; the main image is always shown whole. */}
+            {artwork.detailImages.length > 0 && (
+              <div className="mt-4 grid grid-cols-2 gap-4">
+                {artwork.detailImages.map((image, index) => (
+                  <figure key={`${image.src}-${index}`}>
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      width={600}
+                      height={600}
+                      sizes="(max-width: 768px) 50vw, 30vw"
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        aspectRatio: "1 / 1",
+                        objectFit: "cover",
+                        display: "block",
+                      }}
+                    />
+                    {image.caption && (
+                      <ImageCaption>{image.caption}</ImageCaption>
+                    )}
+                  </figure>
+                ))}
+              </div>
+            )}
           </div>
 
           <aside className="md:sticky md:top-32">
@@ -162,5 +176,16 @@ export default async function ArtworkPage({ params }: Props) {
         </div>
       </section>
     </div>
+  );
+}
+
+function ImageCaption({ children }: { children: ReactNode }) {
+  return (
+    <figcaption
+      className="font-sans-light mt-2 text-center"
+      style={{ fontSize: "0.65rem", color: "var(--sepia)" }}
+    >
+      {children}
+    </figcaption>
   );
 }

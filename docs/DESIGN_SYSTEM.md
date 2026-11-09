@@ -33,7 +33,7 @@ Do not duplicate these values in another token file. If a color changes, update 
 ## Layout and accessibility rules
 
 - Design mobile-first; verify roughly 390 px and 1440 px widths.
-- Preserve image aspect ratios. Artwork may be cropped only in browsing cards, never on the detail page.
+- Preserve image aspect ratios. The full artwork may be cropped only in browsing cards, never on the detail page. Close-up (detail) images on the artwork page are shown as small square crops, two per row, beneath the uncropped main image.
 - Every CMS image requires useful alt text. Decorative backgrounds may use empty alt text only when they convey no information.
 - Keep keyboard focus visible and do not encode availability using color alone.
 - Long titles, long gallery names, missing detail images, and missing optional hero images must remain usable.
