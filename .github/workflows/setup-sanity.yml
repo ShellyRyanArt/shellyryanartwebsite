@@ -1,13 +1,8 @@
-name: Set up Sanity content and Studio
+name: Deploy approved Studio fix (no migration)
 
 on:
-  workflow_dispatch:
-    inputs:
-      migrate_content:
-        description: First-time setup only — migrate the original website snapshot before deploying Studio
-        required: true
-        type: boolean
-        default: false
+  push:
+    branches: [deploy/studio-20261109-fdbd9bb]
 
 jobs:
   setup:
@@ -22,9 +17,10 @@ jobs:
       SANITY_STUDIO_DATASET: ${{ vars.NEXT_PUBLIC_SANITY_DATASET }}
       SANITY_STUDIO_API_VERSION: ${{ vars.NEXT_PUBLIC_SANITY_API_VERSION }}
       SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
-      SANITY_API_WRITE_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: fdbd9bbdfb49366692d4fe8d4a727565e19eb3a5
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -32,8 +28,7 @@ jobs:
       - run: npm ci
       - name: Validate Studio schema
         run: npm run sanity:schema
-      - name: Migrate the existing website content
-        if: ${{ inputs.migrate_content }}
-        run: npm run sanity:migrate
+      - name: Verify deployed dependency versions
+        run: npm ls sanity react react-dom --depth=0
       - name: Deploy the client Studio
         run: npm run sanity:deploy -- --yes
