@@ -8,6 +8,8 @@ Sanity is the canonical source for every field below once `NEXT_PUBLIC_SANITY_PR
 
 Availability display: `sold` shows no status label on the artwork page. A sold work with `purchaseUrl` keeps its external gallery button; a sold work without one shows no call to action. `not-for-sale` and hidden work never show a call to action.
 
+Image text: `contentImage.alt` is required everywhere except items in `artwork.detailImages`. Blank close-up alt text is filled at read time with `Detail of <artwork title>` (`withDetailAltFallback` in `sanity/lib/content.ts`). No migration is needed; existing images keep their text.
+
 Collection membership is owned only by the artwork's `collections` references. Do not add a second editable artwork list to Collection documents.
 
 ## Collection / Series

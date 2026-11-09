@@ -11,6 +11,7 @@ import type {
   ContactPageContent,
   HomePageContent,
   ProcessPageContent,
+  SiteImage,
   SiteSettings,
 } from "@/content/types";
 import { isSanityConfigured } from "@/sanity/env";
@@ -73,6 +74,22 @@ export function mergePublishedContent<T extends object>(
   return { ...fallback, ...definedFields };
 }
 
+// Close-up images may be published without screen-reader text. Give each one
+// a plain fallback based on the artwork title so no image is left unlabeled.
+export function withDetailAltFallback(
+  images: Partial<SiteImage>[],
+  title: string,
+): SiteImage[] {
+  return images
+    .filter((image): image is SiteImage & Partial<SiteImage> =>
+      Boolean(image?.src),
+    )
+    .map((image) => ({
+      ...image,
+      alt: image.alt?.trim() || `Detail of ${title}`,
+    }));
+}
+
 function normalizeArtwork(artwork: Partial<Artwork>): Artwork | null {
   if (!artwork.id || !artwork.slug || !artwork.title || !artwork.mainImage?.src)
     return null;
@@ -82,7 +99,10 @@ function normalizeArtwork(artwork: Partial<Artwork>): Artwork | null {
     slug: artwork.slug,
     title: artwork.title,
     mainImage: artwork.mainImage,
-    detailImages: artwork.detailImages || [],
+    detailImages: withDetailAltFallback(
+      artwork.detailImages || [],
+      artwork.title,
+    ),
     medium: artwork.medium || "Mixed Media",
     year: artwork.year,
     dimensions: artwork.dimensions || "Dimensions available on request",
