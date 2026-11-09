@@ -30,14 +30,15 @@ export default async function ArtworkPage({ params }: Props) {
 
   const cta = getArtworkCta(artwork);
   const price = getVisiblePrice(artwork);
+  const availabilityLabel = getAvailabilityLabel(artwork.availability);
   const images = [artwork.mainImage, ...artwork.detailImages];
 
   return (
     <div style={{ background: "var(--parchment)", minHeight: "100vh" }}>
       <section className="px-8 pb-10 pt-40 text-center">
-        <p className="section-eyebrow mb-4">
-          {getAvailabilityLabel(artwork.availability)}
-        </p>
+        {availabilityLabel && (
+          <p className="section-eyebrow mb-4">{availabilityLabel}</p>
+        )}
         <h1 className="page-title">{artwork.title}</h1>
         <div className="divider mt-6" />
       </section>
