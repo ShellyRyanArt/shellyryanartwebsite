@@ -6,7 +6,11 @@ import {
   fallbackPages,
   fallbackSiteSettings,
 } from "@/content/fallback";
-import { getArtworkCta, getVisiblePrice } from "@/content/presentation";
+import {
+  getArtworkCta,
+  getAvailabilityLabel,
+  getVisiblePrice,
+} from "@/content/presentation";
 import { mergePublishedContent } from "@/sanity/lib/content";
 
 describe("migrated content snapshot", () => {
@@ -82,13 +86,36 @@ describe("artwork purchase presentation", () => {
     });
   });
 
-  it("does not show a purchase action for sold or hidden work", () => {
+  it("keeps the gallery link for sold work that has one", () => {
+    const artwork = { ...fallbackArtworks[0], availability: "sold" as const };
+    expect(getArtworkCta(artwork)).toEqual({
+      href: artwork.purchaseUrl,
+      label: artwork.purchaseButtonLabel,
+      external: true,
+    });
+  });
+
+  it("does not show a purchase action for unlinked sold, not-for-sale, or hidden work", () => {
     expect(
-      getArtworkCta({ ...fallbackArtworks[0], availability: "sold" }),
+      getArtworkCta({
+        ...fallbackArtworks[0],
+        availability: "sold",
+        purchaseUrl: undefined,
+      }),
+    ).toBeNull();
+    expect(
+      getArtworkCta({ ...fallbackArtworks[0], availability: "not-for-sale" }),
     ).toBeNull();
     expect(
       getArtworkCta({ ...fallbackArtworks[0], isVisible: false }),
     ).toBeNull();
+  });
+
+  it("hides the status label only for sold work", () => {
+    expect(getAvailabilityLabel("sold")).toBeNull();
+    expect(getAvailabilityLabel("available")).toBe("Available");
+    expect(getAvailabilityLabel("reserved")).toBe("Reserved");
+    expect(getAvailabilityLabel("not-for-sale")).toBe("Not for sale");
   });
 
   it("only exposes a formatted price when the editor enables it", () => {

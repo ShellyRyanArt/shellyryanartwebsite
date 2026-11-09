@@ -6,6 +6,8 @@ Sanity is the canonical source for every field below once `NEXT_PUBLIC_SANITY_PR
 
 `title`, `slug`, `mainImage`, `detailImages`, `medium`, `dimensions`, `depth`, `year`, `description`, `collections`, `availability`, `price`, `showPrice`, `galleryName`, `purchaseUrl`, `purchaseButtonLabel`, `certificateNote`, `featured`, `displayOrder`, `isVisible`.
 
+Availability display: `sold` shows no status label on the artwork page. A sold work with `purchaseUrl` keeps its external gallery button; a sold work without one shows no call to action. `not-for-sale` and hidden work never show a call to action.
+
 Collection membership is owned only by the artwork's `collections` references. Do not add a second editable artwork list to Collection documents.
 
 ## Collection / Series

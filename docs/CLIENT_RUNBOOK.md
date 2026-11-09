@@ -10,7 +10,7 @@ Your normal website work happens at **your website address followed by `/studio`
 4. Upload the **Main image** and write a short description of the image for screen readers.
 5. Add close-ups under **Detail and close-up images**. Drag images to reorder them.
 6. Enter medium, dimensions, year, description, and collection/series.
-7. Open **Availability & purchase**. Choose Available, Reserved, Sold, or Not for sale.
+7. Open **Availability & purchase**. Choose Available, Reserved, Sold, or Not for sale. Sold pieces show no status label on the website; if they have a gallery link, the gallery button still appears so visitors can see the piece there.
 8. If a gallery is selling it, paste the complete gallery page link and set the button text, such as “Purchase at Orleans Gallery.”
 9. Add a price only when wanted. Turn on **Show price on the website** to display it.
 10. Check **Show on website**, choose a display-order number, and select **Publish**.

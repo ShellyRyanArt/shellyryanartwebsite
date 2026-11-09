@@ -90,6 +90,8 @@ export const artwork = defineType({
     defineField({
       name: "availability",
       title: "Availability",
+      description:
+        "Sold pieces show no status label on the website. If a purchase page link is added, the gallery button still appears so visitors can view the piece there.",
       type: "string",
       group: "sales",
       initialValue: "available",
