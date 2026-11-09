@@ -11,7 +11,10 @@ import {
   getAvailabilityLabel,
   getVisiblePrice,
 } from "@/content/presentation";
-import { mergePublishedContent } from "@/sanity/lib/content";
+import {
+  mergePublishedContent,
+  withDetailAltFallback,
+} from "@/sanity/lib/content";
 
 describe("migrated content snapshot", () => {
   it("keeps every artwork addressable with a unique slug and primary image", () => {
@@ -122,5 +125,30 @@ describe("artwork purchase presentation", () => {
     const artwork = { ...fallbackArtworks[0], price: 4800 };
     expect(getVisiblePrice({ ...artwork, showPrice: false })).toBeNull();
     expect(getVisiblePrice({ ...artwork, showPrice: true })).toBe("$4,800");
+  });
+});
+
+describe("close-up image text", () => {
+  it("fills blank close-up descriptions from the artwork title", () => {
+    expect(
+      withDetailAltFallback(
+        [
+          { src: "/a.jpg" },
+          { src: "/b.jpg", alt: "   " },
+          { src: "/c.jpg", alt: "Orange claw" },
+        ],
+        "Tide Walker",
+      ),
+    ).toEqual([
+      { src: "/a.jpg", alt: "Detail of Tide Walker" },
+      { src: "/b.jpg", alt: "Detail of Tide Walker" },
+      { src: "/c.jpg", alt: "Orange claw" },
+    ]);
+  });
+
+  it("drops close-ups that have no uploaded image", () => {
+    expect(withDetailAltFallback([{ alt: "Empty" }], "Tide Walker")).toEqual(
+      [],
+    );
   });
 });
