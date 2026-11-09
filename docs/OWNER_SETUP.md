@@ -8,7 +8,7 @@ The code integration is complete without credentials. These one-time account ste
 2. Add the production domain, temporary `workers.dev` address, and `http://localhost:3000` to the project's CORS origins. Allow credentials for Studio login.
 3. Create a short-lived Editor token for migration.
 4. Copy `.env.example` to `.env.local` and add the project ID, dataset, and migration token.
-5. Run the **Set up Sanity content and Studio** GitHub workflow once. It uploads the six current artwork images, portrait, logo, collections, pages, and settings, then deploys the Studio. The migration refuses to overwrite existing site content.
+5. For the first setup only, run the **Set up Sanity content and Studio** GitHub workflow with **migrate_content** checked. It uploads the six current artwork images, portrait, logo, collections, pages, and settings, then deploys the Studio. The migration refuses to overwrite existing site content. Leave **migrate_content** unchecked (the default) for subsequent Studio deployments.
 6. The Studio is deployed at `https://shelly-ryan-art.sanity.studio`.
 7. Open the hosted Studio, confirm every document, add Shelly as an Editor, then revoke the temporary migration token.
 
@@ -49,6 +49,14 @@ Pushes to `main` run all checks and deploy to Cloudflare Workers. The weekly San
 The repo intentionally uses the supported OpenNext adapter for this existing Next.js 16 application. Cloudflare's newer default `vinext` route is currently beta; it can be evaluated later without coupling that experiment to the CMS migration.
 
 The editor itself is hosted on Sanity's managed Studio service. `/studio` remains the client's stable shortcut, while the public Cloudflare Worker stays small and focused on the website.
+
+## Studio updates and pane flashing
+
+Studio deployments are separate from the public website deployment. Merging a Studio dependency or configuration change into `main` deploys the website, but does **not** update the editor. After approval, also run **Set up Sanity content and Studio** on `main`, leaving **migrate_content** unchecked.
+
+The Studio application ID is pinned in `sanity.cli.ts` to the existing deployment (`dyc2gl6nh6axxic71ybq3yl2`). This makes deployment targeting explicit; it is not a runtime navigation fix.
+
+For the November 9, 2026 pane-flashing report, see [STUDIO_TROUBLESHOOTING.md](STUDIO_TROUBLESHOOTING.md) for evidence, verification, and rollback steps. Do not publish or discard the existing Common Green Darner draft while diagnosing navigation.
 
 ## 5. Recovery layers
 

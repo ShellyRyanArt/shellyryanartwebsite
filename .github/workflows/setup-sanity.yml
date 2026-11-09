@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       migrate_content:
-        description: Upload the current website content before deploying Studio
+        description: First-time setup only — migrate the original website snapshot before deploying Studio
         required: true
         type: boolean
-        default: true
+        default: false
 
 jobs:
   setup:
