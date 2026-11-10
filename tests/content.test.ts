@@ -10,6 +10,7 @@ import {
   getArtworkCta,
   getAvailabilityLabel,
   getVisiblePrice,
+  sortForGallery,
 } from "@/content/presentation";
 import {
   mergePublishedContent,
@@ -150,5 +151,33 @@ describe("close-up image text", () => {
     expect(withDetailAltFallback([{ alt: "Empty" }], "Tide Walker")).toEqual(
       [],
     );
+  });
+});
+
+describe("gallery order", () => {
+  it("lists available work first, then reserved, then sold, keeping display order within each group", () => {
+    const base = fallbackArtworks[0];
+    const make = (slug: string, availability: typeof base.availability) => ({
+      ...base,
+      id: slug,
+      slug,
+      availability,
+    });
+    const input = [
+      make("sold-a", "sold"),
+      make("avail-a", "available"),
+      make("nfs-a", "not-for-sale"),
+      make("reserved-a", "reserved"),
+      make("avail-b", "available"),
+      make("sold-b", "sold"),
+    ];
+    expect(sortForGallery(input).map((artwork) => artwork.slug)).toEqual([
+      "avail-a",
+      "avail-b",
+      "reserved-a",
+      "sold-a",
+      "nfs-a",
+      "sold-b",
+    ]);
   });
 });

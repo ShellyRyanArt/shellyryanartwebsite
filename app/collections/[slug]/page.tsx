@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { sortForGallery } from "@/content/presentation";
 import { getArtworks, getCollectionBySlug } from "@/sanity/lib/content";
 
 export default async function CollectionPage({
@@ -15,8 +16,8 @@ export default async function CollectionPage({
     getArtworks(),
   ]);
   if (!collection) notFound();
-  const artworks = allArtworks.filter((artwork) =>
-    artwork.collectionSlugs.includes(slug),
+  const artworks = sortForGallery(
+    allArtworks.filter((artwork) => artwork.collectionSlugs.includes(slug)),
   );
 
   return (

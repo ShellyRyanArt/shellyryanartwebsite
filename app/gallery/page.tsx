@@ -1,13 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { sortForGallery } from "@/content/presentation";
 import { getArtworks, getCollections } from "@/sanity/lib/content";
 
 export default async function GalleryPage() {
-  const [artworks, collections] = await Promise.all([
+  const [allArtworks, collections] = await Promise.all([
     getArtworks(),
     getCollections(),
   ]);
+  const artworks = sortForGallery(allArtworks);
 
   return (
     <div style={{ background: "var(--parchment)", minHeight: "100vh" }}>

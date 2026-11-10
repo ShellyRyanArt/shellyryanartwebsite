@@ -45,3 +45,25 @@ export function getAvailabilityLabel(
     "not-for-sale": "Not for sale",
   }[availability];
 }
+
+// Gallery grouping: work that can still be bought comes first, then reserved,
+// then sold and not-for-sale. Within each group the editor's display order
+// (and then the title) is kept, so a piece moves down automatically when it
+// is marked sold.
+const availabilityRank: Record<Artwork["availability"], number> = {
+  available: 0,
+  reserved: 1,
+  sold: 2,
+  "not-for-sale": 2,
+};
+
+export function sortForGallery(artworks: Artwork[]): Artwork[] {
+  return artworks
+    .map((artwork, index) => ({ artwork, index }))
+    .sort(
+      (a, b) =>
+        availabilityRank[a.artwork.availability] -
+          availabilityRank[b.artwork.availability] || a.index - b.index,
+    )
+    .map(({ artwork }) => artwork);
+}
