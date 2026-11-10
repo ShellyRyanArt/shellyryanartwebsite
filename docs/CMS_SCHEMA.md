@@ -6,6 +6,8 @@ Sanity is the canonical source for every field below once `NEXT_PUBLIC_SANITY_PR
 
 `title`, `slug`, `mainImage`, `detailImages`, `medium`, `dimensions`, `depth`, `year`, `description`, `collections`, `availability`, `price`, `showPrice`, `galleryName`, `purchaseUrl`, `purchaseButtonLabel`, `certificateNote`, `featured`, `displayOrder`, `isVisible`.
 
+Gallery order: `sortForGallery` lists `available`, then `reserved`, then `sold`/`not-for-sale`, keeping `displayOrder` (then title) within each group.
+
 Availability display: `sold` shows no status label on the artwork page. A sold work with `purchaseUrl` keeps its external gallery button; a sold work without one shows no call to action. `not-for-sale` and hidden work never show a call to action.
 
 Image text: `contentImage.alt` is required everywhere except items in `artwork.detailImages`. Blank close-up alt text is filled at read time with `Detail of <artwork title>` (`withDetailAltFallback` in `sanity/lib/content.ts`). No migration is needed; existing images keep their text.

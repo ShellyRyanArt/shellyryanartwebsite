@@ -13,7 +13,7 @@ Your normal website work happens at **your website address followed by `/studio`
 7. Open **Availability & purchase**. Choose Available, Reserved, Sold, or Not for sale. Sold pieces show no status label on the website; if they have a gallery link, the gallery button still appears so visitors can see the piece there.
 8. If a gallery is selling it, paste the complete gallery page link and set the button text, such as “Purchase at Orleans Gallery.”
 9. Add a price only when wanted. Turn on **Show price on the website** to display it.
-10. Check **Show on website**, choose a display-order number, and select **Publish**.
+10. Check **Show on website**, choose a display-order number, and select **Publish**. The gallery always lists available pieces first, then reserved, then sold; the display-order number sets the order within each group.
 
 Publishing updates the live site directly. There is no extra technical step.
 
